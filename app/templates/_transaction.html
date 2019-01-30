@@ -1,0 +1,10 @@
+<div>
+	<p>
+		<img src="{{ transaction.payer.avatar(36) }}">
+		User: {{ transaction.payer.username }}
+	</p>
+	<p>Amount: {{ transaction.amount }}</p>
+	<p>Note: {{ transaction.note }}</p>
+	<p>Monthly?: {{ transaction.recurring }}</p>
+	<hr>
+</div>
