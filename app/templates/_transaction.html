@@ -1,10 +1,13 @@
-<div>
-	<p>
+<tr>
+	<td>
 		<img src="{{ transaction.payer.avatar(36) }}">
-		User: {{ transaction.payer.username }}
-	</p>
-	<p>Amount: {{ transaction.amount }}</p>
-	<p>Note: {{ transaction.note }}</p>
-	<p>Monthly?: {{ transaction.recurring }}</p>
-	<hr>
-</div>
+		{{ transaction.payer.username }}
+	</td>
+	<td>{{ transaction.amount }}</td>
+	<td>{{ transaction.note }}</td>
+	<!--<td><input type="button" value="Delete" onclick="{{ url_for('edit',username=current_user.username,id=transaction.id) }}"/></td> -->
+	<td>
+		<button onclick="window.location.href='{{ url_for("edit",id=transaction.id) }}';">Delete</button>
+	</td>
+	<td>{{ transaction.timestamp }}
+</tr>

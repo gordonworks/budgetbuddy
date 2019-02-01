@@ -27,3 +27,8 @@ class RegistrationForm(FlaskForm):
 		user = User.query.filter_by(email=email.data).first()
 		if user is not None:
 			raise ValidationError('Email taken. Use another.')
+
+class AddTransactionForm(FlaskForm):
+	amount = StringField('Amount', validators = [DataRequired()])
+	note = StringField('Note', validators = [DataRequired()])
+	add = SubmitField('Add')

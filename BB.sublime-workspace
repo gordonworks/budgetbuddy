@@ -1,0 +1,985 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"first",
+				"first_or_404"
+			],
+			[
+				"err",
+				"errorhandler"
+			],
+			[
+				"login",
+				"login_required"
+			],
+			[
+				"Pas",
+				"password"
+			],
+			[
+				"t",
+				"transactions"
+			],
+			[
+				"send",
+				"send_async_email"
+			],
+			[
+				"R",
+				"ResetPasswordForm"
+			],
+			[
+				"is",
+				"is_authenticated"
+			],
+			[
+				"res",
+				"reset_password"
+			],
+			[
+				"exp",
+				"expires_in"
+			],
+			[
+				"html",
+				"html_body"
+			],
+			[
+				"cur",
+				"current_user"
+			],
+			[
+				"ne",
+				"next_url"
+			],
+			[
+				"prev",
+				"prev_url"
+			],
+			[
+				"next",
+				"next_url"
+			],
+			[
+				"Submit",
+				"SubmitField"
+			],
+			[
+				"fil",
+				"filter_by"
+			],
+			[
+				"asser",
+				"assertEqual"
+			],
+			[
+				"ass",
+				"assertEqual"
+			],
+			[
+				"followe",
+				"followed"
+			],
+			[
+				"assert",
+				"assertTrue"
+			],
+			[
+				"foll",
+				"followed_id"
+			],
+			[
+				"follower",
+				"follower_id"
+			],
+			[
+				"set",
+				"setLevel"
+			],
+			[
+				"mail",
+				"mail_handler"
+			],
+			[
+				"MAIL",
+				"MAIL_PASSWORD"
+			],
+			[
+				"e",
+				"edit_profile"
+			],
+			[
+				"url_",
+				"url_parse"
+			],
+			[
+				"render",
+				"render_template"
+			],
+			[
+				"con",
+				"convertFromEuros"
+			],
+			[
+				"b",
+				"bin2dec"
+			],
+			[
+				"fa",
+				"factor"
+			],
+			[
+				"pas",
+				"password"
+			],
+			[
+				"Pass",
+				"PasswordField"
+			],
+			[
+				"P",
+				"PasswordField"
+			],
+			[
+				"atm",
+				"atm_number"
+			],
+			[
+				"url",
+				"url_for"
+			],
+			[
+				"nex",
+				"next_page"
+			],
+			[
+				"check",
+				"check_password_hash"
+			],
+			[
+				"recal",
+				"recalcDAsFromExpenses"
+			],
+			[
+				"day",
+				"daysthismonth"
+			],
+			[
+				"rec",
+				"recalcDAsFromExpenses"
+			],
+			[
+				"days",
+				"daysthismonth"
+			],
+			[
+				"ex",
+				"excess"
+			],
+			[
+				"fet",
+				"fetchone"
+			],
+			[
+				"add_",
+				"add_money"
+			],
+			[
+				"add",
+				"add_expense"
+			],
+			[
+				"sp",
+				"spread_to_DAs"
+			],
+			[
+				"daily",
+				"daily_purchase"
+			],
+			[
+				"da",
+				"daysthismonth"
+			],
+			[
+				"date",
+				"date2txt"
+			],
+			[
+				"retu",
+				"returnTA"
+			],
+			[
+				"today",
+				"today"
+			],
+			[
+				"Today",
+				"todayAllowance"
+			],
+			[
+				"month",
+				"monthExpense"
+			],
+			[
+				"total",
+				"totalUnspent"
+			],
+			[
+				"tot",
+				"totalUnspent"
+			],
+			[
+				"user",
+				"username"
+			],
+			[
+				"fe",
+				"fetchone"
+			],
+			[
+				"updat",
+				"update_DA_calendar"
+			],
+			[
+				"cal",
+				"calc_allowance"
+			],
+			[
+				"up",
+				"update_user_table"
+			],
+			[
+				"print",
+				"print_menu"
+			],
+			[
+				"E",
+				"Expenses"
+			],
+			[
+				"In",
+				"INTEGER"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/__init__.py",
+			"settings":
+			{
+				"buffer_size": 354,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/models.py",
+			"settings":
+			{
+				"buffer_size": 1564,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "budgetbuddy.py",
+			"settings":
+			{
+				"buffer_size": 174,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/forms.py",
+			"settings":
+			{
+				"buffer_size": 1414,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/templates/login.html",
+			"settings":
+			{
+				"buffer_size": 707,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/templates/register.html",
+			"settings":
+			{
+				"buffer_size": 925,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/templates/user.html",
+			"settings":
+			{
+				"buffer_size": 766,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/templates/expenses.html",
+			"settings":
+			{
+				"buffer_size": 619,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/templates/base.html",
+			"settings":
+			{
+				"buffer_size": 621,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/routes.py",
+			"settings":
+			{
+				"buffer_size": 3367,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/templates/index.html",
+			"settings":
+			{
+				"buffer_size": 357,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/errors.py",
+			"settings":
+			{
+				"buffer_size": 262,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/templates/_transaction.html",
+			"settings":
+			{
+				"buffer_size": 458,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "config.py",
+			"settings":
+			{
+				"buffer_size": 305,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/grainwat/Desktop/pyf/Projects/Budgetbuddy/app/500.html",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Budgetbuddy/app/templates/404.html",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Budgetbuddy/app/templates/_post.html",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Budgetbuddy/app/config.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Budgetbuddy/app/budgetbuddy.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Flasklearn/app/tests.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Flasklearn/app/models.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Flasklearn/app/forms.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Flasklearn/config.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/budgetdaddy/bb1.py",
+		"/C/Users/grainwat/Desktop/pyf/currencies.py",
+		"/C/Users/grainwat/Desktop/pyf/ex.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Flasklearn/app/routes.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Flasklearn/app/__init__.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Flasklearn/mblog.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Flasklearn/app/templates/base.html",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Flasklearn/app/templates/index.html",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Flasklearn/app/templates/register.html",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Flasklearn/app/templates/login.html",
+		"/C/Users/grainwat/Documents/Scripts/atmdispatch.py",
+		"/C/Users/grainwat/Desktop/atmdispatch.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Flasklearn/app/config.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/budgetdaddy/outline.txt",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Flasklearn/home.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/bbproto/bb1.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/bbproto/outline.txt",
+		"/C/Users/grainwat/Desktop/pyf/Projects/bbproto/bb1_prework.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/bbproto/bb.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/sqltut/testread.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/easylearnflask/app.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/sqltut/test.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/bbproto/user.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/bbproto/bb_prerework.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/bbproto/test.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/easylearnflask/templates/layout.html",
+		"/C/Users/grainwat/Desktop/pyf/Projects/easylearnflask/templates/test.html",
+		"/C/Users/grainwat/Desktop/pyf/Projects/easylearnflask/hello.py"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"url_for"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 9,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/__init__.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 354,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								23,
+								23
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/models.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1564,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1009,
+								1009
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 54.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "budgetbuddy.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 174,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								62,
+								62
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/forms.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1414,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1414,
+								1414
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/templates/login.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 707,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								635,
+								635
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/templates/register.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 925,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								122,
+								100
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/templates/user.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 766,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								766,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/templates/expenses.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 619,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								110,
+								110
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "app/templates/base.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 621,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								302,
+								302
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "app/routes.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3367,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3221,
+								3221
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 983.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "app/templates/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 357,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								357,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "app/errors.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 262,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								80,
+								80
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "app/templates/_transaction.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 458,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								169,
+								169
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "config.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 305,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								305,
+								305
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "BB.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 117.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

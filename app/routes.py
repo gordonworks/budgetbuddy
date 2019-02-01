@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, AddTransactionForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User,Transaction
 from werkzeug.urls import url_parse
@@ -61,22 +61,52 @@ def register():
 		return redirect(url_for('login'))
 	return render_template('register.html',title="Registration",form=form)
 
-@app.route('/user/<username>')
+@app.route('/user/<username>',methods=['GET','POST'])
 @login_required
 def user(username):
 	user = User.query.filter_by(username=username).first_or_404()
-	transactions = [
-		{
-			'payer':user,
-			'amount' : 500.00,
-			'note': 'rent',
-			'recurring' : True
-		},
-		{
-			'payer':user,
-			'amount' : 200.65,
-			'note': 'xbox',
-			'recurring' : False
-		}
-	]
-	return render_template('user.html',user=user,transactions=transactions)
+	form = AddTransactionForm()
+	if form.validate_on_submit():
+		t = Transaction(note=form.note.data,amount='-'+form.amount.data,
+			recurring=False,payer=current_user)
+		db.session.add(t)
+		db.session.commit()
+		return redirect(url_for('user',username=current_user.username))
+	transactions = Transaction.query.filter_by(payer = current_user).all()
+	return render_template('user.html',user=user,transactions=transactions,form=form)
+
+@app.route('/edit/<int:id>/',methods=['GET','POST'])
+@login_required
+def edit(id):
+	t = Transaction.query.filter_by(id=id).first_or_404()
+	db.session.delete(t)
+	db.session.commit()
+	return redirect(url_for('user',username=current_user.username))
+
+@app.route('/expenses',methods=['GET','POST'])
+@login_required
+def expenses():
+	form = AddTransactionForm()
+	user = User.query.filter_by(username=current_user.username).first_or_404()
+	transactions = Transaction.query.filter_by(recurring=True).all()
+	if form.validate_on_submit():
+		t = Transaction(note=form.note.data,amount='-'+form.amount.data,
+			recurring=True,payer=current_user)
+		db.session.add(t)
+		db.session.commit()
+		return redirect(url_for('expenses'))
+	return render_template('expenses.html',user=user,transactions=transactions,form=form)
+
+@app.route('/income',methods=['GET','POST'])
+@login_required
+def income():
+	form = AddTransactionForm()
+	user = User.query.filter_by(username=current_user.username).first_or_404()
+	transactions = Transaction.query.filter_by(recurring=True).all()
+	if form.validate_on_submit():
+		t = Transaction(note=form.note.data,amount=form.amount.data,
+			recurring=True,payer=current_user)
+		db.session.add(t)
+		db.session.commit()
+		return redirect(url_for('income'))
+	return render_template('expenses.html',user=user,transactions=transactions,form=form)
