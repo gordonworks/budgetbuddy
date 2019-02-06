@@ -4,6 +4,7 @@ from app.forms import LoginForm, RegistrationForm, AddTransactionForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User,Transaction
 from werkzeug.urls import url_parse
+from app.maths import calc_DA
 
 @app.route('/')
 @app.route('/index')
@@ -66,14 +67,17 @@ def register():
 def user(username):
 	user = User.query.filter_by(username=username).first_or_404()
 	form = AddTransactionForm()
+	daily_amount = calc_DA(current_user)
 	if form.validate_on_submit():
 		t = Transaction(note=form.note.data,amount='-'+form.amount.data,
 			recurring=False,payer=current_user)
 		db.session.add(t)
 		db.session.commit()
+		#daily_amount = calc_DA(current_user)
 		return redirect(url_for('user',username=current_user.username))
 	transactions = Transaction.query.filter_by(payer = current_user).all()
-	return render_template('user.html',user=user,transactions=transactions,form=form)
+	return render_template('user.html',user=user,transactions=transactions,form=form,daily_amount=daily_amount)
+	#return render_template('user.html',user=user,transactions=transactions,form=form)
 
 @app.route('/edit/<int:id>/',methods=['GET','POST'])
 @login_required
@@ -82,16 +86,20 @@ def edit(id):
 	db.session.delete(t)
 	db.session.commit()
 	return redirect(url_for('user',username=current_user.username))
+	#return redirect(request.url)
 
 @app.route('/expenses',methods=['GET','POST'])
 @login_required
 def expenses():
 	form = AddTransactionForm()
 	user = User.query.filter_by(username=current_user.username).first_or_404()
-	transactions = Transaction.query.filter_by(recurring=True).all()
+	#transactions = Transaction.query.filter_by(recurring=True).all()
+	transactions = Transaction.query.filter(Transaction.recurring==True,Transaction.amount<='0',
+		Transaction.payer==current_user).all()
+	print(form.validate_on_submit())
 	if form.validate_on_submit():
 		t = Transaction(note=form.note.data,amount='-'+form.amount.data,
-			recurring=True,payer=current_user)
+			recurring=True,payer=current_user,timestamp=form.dt.data)
 		db.session.add(t)
 		db.session.commit()
 		return redirect(url_for('expenses'))
@@ -102,10 +110,12 @@ def expenses():
 def income():
 	form = AddTransactionForm()
 	user = User.query.filter_by(username=current_user.username).first_or_404()
-	transactions = Transaction.query.filter_by(recurring=True).all()
+	#transactions = Transaction.query.filter_by(recurring=True).all()
+	transactions = Transaction.query.filter(Transaction.amount>='0',
+		Transaction.payer==current_user).all()
 	if form.validate_on_submit():
 		t = Transaction(note=form.note.data,amount=form.amount.data,
-			recurring=True,payer=current_user)
+			recurring=True,payer=current_user,timestamp=form.dt.data)
 		db.session.add(t)
 		db.session.commit()
 		return redirect(url_for('income'))
