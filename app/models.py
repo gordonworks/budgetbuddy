@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime,date
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from app import login
@@ -15,6 +15,7 @@ class User(UserMixin, db.Model):
 	email = db.Column(db.String(120), index=True, unique=True)
 	password_hash = db.Column(db.String(128))
 	daily_allowance = db.Column(db.String(16))
+	dA_timestamp = db.Column(db.Date,index=True,default=date.today)
 	#adds transaction.payer as a reference back to the user
 	#User u -> u.transactions will give the list of transactions
 	transactions = db.relationship('Transaction',backref='payer',lazy='dynamic')

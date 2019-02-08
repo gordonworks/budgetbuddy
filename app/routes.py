@@ -5,6 +5,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User,Transaction
 from werkzeug.urls import url_parse
 from app.maths import calc_DA
+from datetime import date
 
 @app.route('/')
 @app.route('/index')
@@ -67,24 +68,38 @@ def register():
 def user(username):
 	user = User.query.filter_by(username=username).first_or_404()
 	form = AddTransactionForm()
-	daily_amount = calc_DA(current_user)
+	#daily_amount = calc_DA(current_user)
 	if form.validate_on_submit():
 		t = Transaction(note=form.note.data,amount='-'+form.amount.data,
 			recurring=False,payer=current_user)
+		
+		f = float(user.daily_allowance)
+		user.daily_allowance = str(f+float(t.amount))
+		
 		db.session.add(t)
 		db.session.commit()
-		#daily_amount = calc_DA(current_user)
 		return redirect(url_for('user',username=current_user.username))
 	transactions = Transaction.query.filter_by(payer = current_user).all()
-	return render_template('user.html',user=user,transactions=transactions,form=form,daily_amount=daily_amount)
+	return render_template('user.html',user=user,transactions=transactions,form=form)
 	#return render_template('user.html',user=user,transactions=transactions,form=form)
 
 @app.route('/edit/<int:id>/',methods=['GET','POST'])
 @login_required
 def edit(id):
 	t = Transaction.query.filter_by(id=id).first_or_404()
+	user = User.query.filter_by(username=current_user.username).first_or_404()
 	db.session.delete(t)
 	db.session.commit()
+	#deleting will subtract from the DA or recalculate its new value
+	
+	#THIS CAUSES A 404 on the user page - possibly fixed?
+	if t.recurring:
+		user.daily_allowance = calc_DA(current_user)
+	else:
+		f = float(user.daily_allowance)
+		user.daily_allowance = str(f-float(t.amount))
+	db.session.commit()
+	
 	return redirect(url_for('user',username=current_user.username))
 	#return redirect(request.url)
 
@@ -100,6 +115,8 @@ def expenses():
 	if form.validate_on_submit():
 		t = Transaction(note=form.note.data,amount='-'+form.amount.data,
 			recurring=True,payer=current_user,timestamp=form.dt.data)
+		user.daily_allowance = calc_DA(current_user)
+		user.dA_timestamp = date.today()
 		db.session.add(t)
 		db.session.commit()
 		return redirect(url_for('expenses'))
@@ -116,6 +133,8 @@ def income():
 	if form.validate_on_submit():
 		t = Transaction(note=form.note.data,amount=form.amount.data,
 			recurring=True,payer=current_user,timestamp=form.dt.data)
+		user.daily_allowance = calc_DA(current_user)
+		user.dA_timestamp = date.today()
 		db.session.add(t)
 		db.session.commit()
 		return redirect(url_for('income'))
