@@ -17,7 +17,7 @@
 		<th>Date</th>
 	</tr>
 	<form action="" method="post">
-		{{form.hidden_tag() }}
+		{{ form.hidden_tag() }}
 
 	{% for transaction in transactions %}
 		{% include '_transaction.html' %}
@@ -27,7 +27,7 @@
 		<td>{{ form.add() }}</td>
 		<td>{{ form.amount(size=10) }}</td>
 		<td>{{ form.note(size=10) }}</td>
-		<td>{{ form.dt(class_='datepicker') }}
+		<td>{{ form.dt(class_='datepicker') }}</td>
 	</tr>
 	</form>
 {% endblock %}

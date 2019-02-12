@@ -1,0 +1,84 @@
+<html>
+	<head>
+		<title>New Budget</title>
+	</head>
+	<body>
+		<table>
+		<tr valign="top">
+			<td><img src="{{ user.avatar(64) }}"></td>
+			<td><h1>New Expenses for User: {{ user.username }}</h1></td>
+		</tr>
+		</table>
+		<hr>
+		<table style="width:100%">
+		<tr>
+			<th>User</th>
+			<th>Amount</th>
+			<th>Note</th>
+			<th>Button</th>
+			<th>Date</th>
+		</tr>
+		<form action="" method="post">
+			{{ form.eForm.hidden_tag() }}
+
+			{% for transaction in transactions.eTrans %}
+				{% include '_transaction.html' %}
+			{% endfor %}
+			
+			<tr>
+				<td>{{ form.eForm.add() }}</td>
+				<td>{{ form.eForm.amount(size=10) }}</td>
+				<td>{{ form.eForm.note(size=10) }}</td>
+				<td>{{ form.eForm.dt(class_='datepicker') }}</td>
+			</tr>
+		</form>
+		</table>
+		<table style="width:100%">
+		<tr>
+			<th>User</th>
+			<th>Amount</th>
+			<th>Note</th>
+			<th>Button</th>
+			<th>Date</th>
+		</tr>
+		<form action="" method="post">
+			{{ form.iForm.hidden_tag() }}
+
+			{% for transaction in transactions.iTrans %}
+				{% include '_transaction.html' %}
+			{% endfor %}
+			
+			<tr>
+				<td>{{ form.iForm.add() }}</td>
+				<td>{{ form.iForm.amount(size=10) }}</td>
+				<td>{{ form.iForm.note(size=10) }}</td>
+				<td>{{ form.iForm.dt(class_='datepicker') }}</td>
+			</tr>
+		</form>
+		</table>
+		<table style="width:100%">
+		<tr>
+			<th>User</th>
+			<th>Amount</th>
+			<th>Note</th>
+			<th>Button</th>
+			<th>Date</th>
+		</tr>
+		<form action="" method="post">
+			{{ form.dForm.hidden_tag() }}
+
+			{% for transaction in transactions.dTrans %}
+				{% include '_transaction.html' %}
+			{% endfor %}
+			
+			<tr>
+				<td>{{ form.dForm.add() }}</td>
+				<td>{{ form.dForm.amount(size=10) }}</td>
+				<td>{{ form.dForm.note(size=10) }}</td>
+				<td>{{ form.dForm.dt(class_='datepicker') }}</td>
+			</tr>
+		</form>
+		</table>
+
+	</body>
+</html>

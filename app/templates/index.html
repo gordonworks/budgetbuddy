@@ -2,9 +2,12 @@
 
 {% block content %}
 	<h1>Hello, {{ current_user.username }}!</h1>
+	{% if not transactions %}
+	<p><a href="{{ url_for('new_entry') }}">Begin New Budget</a></p>
+	{% endif %}
 	{% for transaction in transactions %}
 	<div>
-		<p>User: {{ transaction.user.username }}</p>
+		<p>User: {{ transaction.payer.username }}</p>
 		<p>Amount: {{ transaction.amount }}</p>
 		<p>Note: {{ transaction.note }}</p>
 		<p>Monthly?: {{ transaction.recurring }}</p>

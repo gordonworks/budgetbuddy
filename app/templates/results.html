@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<title>Results Database</title>
+{{ table }}
+
+<form action="" method="post">
+	{{form.hidden_tag() }}
+	<tr>
+		<td>{{ form.add() }}</td>
+		<td>{{ form.amount(size=10) }}</td>
+		<td>{{ form.note(size=10) }}</td>
+		<td>{{ form.dt(class_='datepicker') }}</td>
+	</tr>
+</form>
+
+{% endblock %}

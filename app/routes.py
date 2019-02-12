@@ -6,25 +6,13 @@ from app.models import User,Transaction
 from werkzeug.urls import url_parse
 from app.maths import calc_DA
 from datetime import date
+from app.tables import Results
 
 @app.route('/')
 @app.route('/index')
 @login_required
 def index():
-	transactions = [
-		{
-			'user':{'username':'gordon'},
-			'amount' : 500.00,
-			'note': 'rent',
-			'recurring' : True
-		},
-		{
-			'user':{'username':'gordon'},
-			'amount' : 200.65,
-			'note': 'xbox',
-			'recurring' : False
-		}
-	]
+	transactions = Transaction.query.filter_by(payer = current_user).all()
 	return render_template('index.html',title='Budget Buddy',transactions=transactions)
 
 @app.route('/login',methods=['GET','POST'])
@@ -71,7 +59,7 @@ def user(username):
 	#daily_amount = calc_DA(current_user)
 	if form.validate_on_submit():
 		t = Transaction(note=form.note.data,amount='-'+form.amount.data,
-			recurring=False,payer=current_user)
+			recurring=False,payer=current_user,timestamp=form.dt.data)
 		
 		f = float(user.daily_allowance)
 		user.daily_allowance = str(f+float(t.amount))
@@ -79,13 +67,14 @@ def user(username):
 		db.session.add(t)
 		db.session.commit()
 		return redirect(url_for('user',username=current_user.username))
-	transactions = Transaction.query.filter_by(payer = current_user).all()
-	return render_template('user.html',user=user,transactions=transactions,form=form)
+	transactions = Transaction.query.filter_by(payer = current_user,recurring=False).all()
+	allTrans = Transaction.query.filter_by(payer = current_user,recurring=True).all()
+	return render_template('user.html',user=user,transactions=transactions,form=form,title="Profile",allTrans=allTrans)
 	#return render_template('user.html',user=user,transactions=transactions,form=form)
 
-@app.route('/edit/<int:id>/',methods=['GET','POST'])
+@app.route('/delete/<int:id>/',methods=['GET','POST'])
 @login_required
-def edit(id):
+def delete(id):
 	t = Transaction.query.filter_by(id=id).first_or_404()
 	user = User.query.filter_by(username=current_user.username).first_or_404()
 	db.session.delete(t)
@@ -101,7 +90,8 @@ def edit(id):
 	db.session.commit()
 	
 	return redirect(url_for('user',username=current_user.username))
-	#return redirect(request.url)
+	#return redirect(url_for('edit',id=id))
+	#return redirect(url_for(request.url))
 
 @app.route('/expenses',methods=['GET','POST'])
 @login_required
@@ -111,7 +101,6 @@ def expenses():
 	#transactions = Transaction.query.filter_by(recurring=True).all()
 	transactions = Transaction.query.filter(Transaction.recurring==True,Transaction.amount<='0',
 		Transaction.payer==current_user).all()
-	print(form.validate_on_submit())
 	if form.validate_on_submit():
 		t = Transaction(note=form.note.data,amount='-'+form.amount.data,
 			recurring=True,payer=current_user,timestamp=form.dt.data)
@@ -120,7 +109,8 @@ def expenses():
 		db.session.add(t)
 		db.session.commit()
 		return redirect(url_for('expenses'))
-	return render_template('expenses.html',user=user,transactions=transactions,form=form)
+	return render_template('user.html',username=user.username,
+		user=user,transactions=transactions,form=form,title="Expenses")
 
 @app.route('/income',methods=['GET','POST'])
 @login_required
@@ -138,4 +128,61 @@ def income():
 		db.session.add(t)
 		db.session.commit()
 		return redirect(url_for('income'))
-	return render_template('expenses.html',user=user,transactions=transactions,form=form)
+	return render_template('user.html',username=user.username,user=user,
+		transactions=transactions,form=form,title="Income")
+
+@app.route('/new_entry',methods=['GET','POST'])
+@login_required
+def new_entry():
+	eForm = AddTransactionForm()
+	iForm = AddTransactionForm()
+	dForm = AddTransactionForm()
+	#can reference in Jinja as form.eForm.amount(), etc
+	form = {'eForm':eForm,'iForm':iForm,'dForm':dForm}
+
+	user = User.query.filter_by(username=current_user.username).first_or_404()
+
+	eTrans = Transaction.query.filter(Transaction.recurring==True,Transaction.amount<='0',
+		Transaction.payer==current_user).all()
+	iTrans = Transaction.query.filter(Transaction.amount>='0',
+		Transaction.payer==current_user).all()
+	dTrans = transactions = Transaction.query.filter_by(payer = current_user, recurring=False).all()
+	#reference as transactions.eTrans.payer.username for the payers username
+	transactions = {'eTrans':eTrans,'iTrans':iTrans,'dTrans':dTrans}
+
+	if eForm.validate_on_submit():
+		t = Transaction(note=eForm.note.data,amount='-'+eForm.amount.data,
+			recurring=True,payer=current_user,timestamp=eForm.dt.data)
+		db.session.add(t)
+		db.session.commit()
+		return redirect(url_for('new_entry'))
+	if iForm.validate_on_submit():
+		t = Transaction(note=iForm.note.data,amount=iForm.amount.data,
+			recurring=True,payer=current_user,timestamp=iForm.dt.data)
+		db.session.add(t)
+		db.session.commit()
+		return redirect(url_for('new_entry'))
+	if dForm.validate_on_submit():
+		t = Transaction(note=dForm.note.data,amount='-'+dForm.amount.data,
+			recurring=False,payer=current_user)
+		db.session.add(t)
+		db.session.commit()
+		return redirect(url_for('new_entry'))
+
+	return render_template('new_entry.html',user=user,transactions=transactions,form=form)
+
+@app.route('/results',methods=['GET','POST'])
+@login_required
+def results():
+	user = User.query.filter_by(username=current_user.username).first_or_404()
+	transactions = Transaction.query.filter_by(payer=current_user).all()
+	table = Results(transactions)
+
+	form = AddTransactionForm()
+	if form.validate_on_submit():
+		t = Transaction(note=form.note.data,amount='-'+form.amount.data,
+			recurring=False,payer=current_user,timestamp=form.dt.data)
+		db.session.add(t)
+		db.session.commit()
+		return redirect(url_for('results'))
+	return render_template('results.html',table=table,form=form)

@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.fields.html5 import DateField
 #from wtforms import DateField
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
+from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Optional
 from app.models import User
 
 class LoginForm(FlaskForm):
@@ -35,4 +35,4 @@ class AddTransactionForm(FlaskForm):
 	note = StringField('Note', validators = [DataRequired()])
 	add = SubmitField('Add')
 	#dt = DateField('DatePicker', format='%Y-%m-%d',validators = [DataRequired()])
-	dt = DateField('DatePicker', format='%Y-%m-%d')
+	dt = DateField('DatePicker', format='%Y-%m-%d', validators = [Optional()])

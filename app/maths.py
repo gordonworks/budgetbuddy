@@ -7,7 +7,8 @@ def calc_DA(user):
 	user = User.query.filter_by(username=current_user.username).first_or_404()
 	transactions = Transaction.query.filter_by(payer=current_user).all()
 	total_DA = 0.0
-	daysInMonth = monthrange(datetime.today().year,datetime.today().month)[1]
+	#Gets the remaining days left of the year
+	daysInMonth = monthrange(datetime.today().year,datetime.today().month)[1] - datetime.today().day
 	for t in transactions:
 		total_DA+=float(t.amount)
 	

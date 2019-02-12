@@ -4,11 +4,19 @@
 	<table>
 		<tr valign="top">
 			<td><img src="{{ user.avatar(128) }}"></td>
-			<td><h1>User: {{ user.username }}</h1></td>
+			<td><h1>User: {{ user.username }} editing {{ title }}</h1></td>
 			<tr><td><h2>Daily Amount: {{ user.daily_allowance }} </h2></td></tr>
 		</tr>
-		<tr><td><a href="{{ url_for('expenses') }}">Edit Monthly Expenses</a></td></tr>
-		<tr><td><a href="{{ url_for('income') }}">Add Monthly Income</a></td></tr>
+		{% if title=="Profile" %}
+			<tr><td><a href="{{ url_for('expenses') }}">Edit Monthly Expenses</a></td></tr>
+			<tr><td><a href="{{ url_for('income') }}">Add Monthly Income</a></td></tr>
+		{% elif title=="Expenses" %}
+			<tr><td><a href="{{ url_for('user',username=current_user.username) }}">Add Transactions</a></td></tr>
+			<tr><td><a href="{{ url_for('income') }}">Add Monthly Income</a></td></tr>
+		{% else %}
+			<tr><td><a href="{{ url_for('user',username=current_user.username) }}">Add Transactions</a></td></tr>
+			<tr><td><a href="{{ url_for('income') }}">Add Monthly Income</a></td></tr>
+		{% endif %}
 	</table>
 	<hr>
 	<table style="width:100%">
@@ -19,17 +27,26 @@
 		<th>Button</th>
 		<th>Date</th>
 	</tr>
-	<form action="" method="post">
-		{{form.hidden_tag() }}
+
+	{% if title=="Profile" %}
+		{% for transaction in allTrans %}
+			{% include '_transaction.html' %}
+		{% endfor %}
+	{% endif %}
+
 
 	{% for transaction in transactions %}
 		{% include '_transaction.html' %}
 	{% endfor %}
-	
+
+	<form action="" method="post">
+		{{form.hidden_tag() }}
+
 	<tr>
 		<td>{{ form.add() }}</td>
 		<td>{{ form.amount(size=10) }}</td>
 		<td>{{ form.note(size=10) }}</td>
+		<td>{{ form.dt(class_='datepicker') }}</td>
 	</tr>
 	</form>
 {% endblock %}
