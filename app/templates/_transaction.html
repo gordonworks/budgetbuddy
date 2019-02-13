@@ -6,7 +6,7 @@
 	<td>{{ transaction.amount }}</td>
 	<td>{{ transaction.note }}</td>
 	<td>
-		<button onclick="window.location.href='{{ url_for("delete",id=transaction.id) }}';">Delete</button>
+		<button onclick="window.location.href='{{ url_for("delete",id=transaction.id,next=request.endpoint) }}';">Delete</button>
 	</td>
 	<td>{{ transaction.timestamp }}
 </tr>

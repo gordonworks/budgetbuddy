@@ -5,7 +5,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User,Transaction
 from werkzeug.urls import url_parse
 from app.maths import calc_DA
-from datetime import date
+from datetime import date, datetime
 from app.tables import Results
 
 @app.route('/')
@@ -56,13 +56,17 @@ def register():
 def user(username):
 	user = User.query.filter_by(username=username).first_or_404()
 	form = AddTransactionForm()
-	#daily_amount = calc_DA(current_user)
+	if user.dA_timestamp.day != datetime.today().day:
+		daily_amount = calc_DA(current_user)
 	if form.validate_on_submit():
 		t = Transaction(note=form.note.data,amount='-'+form.amount.data,
 			recurring=False,payer=current_user,timestamp=form.dt.data)
-		
-		f = float(user.daily_allowance)
-		user.daily_allowance = str(f+float(t.amount))
+		#if there was no timestamp selected, then we will subtract from the daily allowance
+		if not t.timestamp:
+			f = float(user.daily_allowance)
+			user.daily_allowance = str(f+float(t.amount))
+		else:
+			user.daily_allowance = calc_DA(current_user)
 		
 		db.session.add(t)
 		db.session.commit()
@@ -84,12 +88,17 @@ def delete(id):
 	#THIS CAUSES A 404 on the user page - possibly fixed?
 	if t.recurring:
 		user.daily_allowance = calc_DA(current_user)
+	elif t.timestamp.day != datetime.today().day:
+		user.daily_allowance = calc_DA(current_user)
 	else:
 		f = float(user.daily_allowance)
 		user.daily_allowance = str(f-float(t.amount))
 	db.session.commit()
-	
-	return redirect(url_for('user',username=current_user.username))
+	#ensures deleting a transaction preserves the current page
+	next_page = request.args.get('next')
+	if not next_page or url_parse(next_page).netloc != '':
+			next_page = url_for('user',username=current_user.username)
+	return redirect(next_page)
 	#return redirect(url_for('edit',id=id))
 	#return redirect(url_for(request.url))
 
