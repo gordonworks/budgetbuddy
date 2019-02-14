@@ -11,10 +11,10 @@
 			<tr><td><a href="{{ url_for('expenses') }}">Edit Monthly Expenses</a></td></tr>
 			<tr><td><a href="{{ url_for('income') }}">Add Monthly Income</a></td></tr>
 		{% elif title=="Expenses" %}
-			<tr><td><a href="{{ url_for('user',username=current_user.username) }}">Add Transactions</a></td></tr>
+			<tr><td><a href="{{ url_for('transactions') }}">Add Transactions</a></td></tr>
 			<tr><td><a href="{{ url_for('income') }}">Add Monthly Income</a></td></tr>
 		{% else %}
-			<tr><td><a href="{{ url_for('user',username=current_user.username) }}">Add Transactions</a></td></tr>
+			<tr><td><a href="{{ url_for('transactions') }}">Add Transactions</a></td></tr>
 			<tr><td><a href="{{ url_for('expenses') }}">Edit Monthly Expenses</a></td></tr>
 		{% endif %}
 	</table>
@@ -48,5 +48,15 @@
 		<td>{{ form.note(size=10) }}</td>
 		<td>{{ form.dt(class_='datepicker') }}</td>
 	</tr>
+
+	
+
 	</form>
+	</table>
+	{% if prev_url %}
+	<a href="{{ prev_url }}">Newer Transactions</a>
+	{% endif %}
+	{% if next_url %}
+	<a href="{{ next_url }}">Older Transactions</a>
+	{% endif %}
 {% endblock %}

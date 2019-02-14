@@ -51,6 +51,43 @@ def register():
 		return redirect(url_for('login'))
 	return render_template('register.html',title="Registration",form=form)
 
+@app.route('/transactions',methods=['GET','POST'])
+@login_required
+def transactions():
+	user = User.query.filter_by(username=current_user.username).first_or_404()
+	form = AddTransactionForm()
+	if user.dA_timestamp.day != datetime.today().day:
+		daily_amount = calc_DA(current_user)
+	if form.validate_on_submit():
+		t = Transaction(note=form.note.data,amount='-'+form.amount.data,
+			recurring=False,payer=current_user,timestamp=form.dt.data)
+		#if there was no timestamp selected, then we will subtract from the daily allowance
+		if not t.timestamp:
+			f = float(user.daily_allowance)
+			user.daily_allowance = str(f+float(t.amount))
+		else:
+			user.daily_allowance = calc_DA(current_user)
+		
+		db.session.add(t)
+		db.session.commit()
+		return redirect(url_for('transactions'))
+
+	page = request.args.get('page',1,type=int)
+	transactions = Transaction.query.filter_by(
+		payer = current_user,recurring=False).order_by(Transaction.timestamp.desc()).paginate(
+		page,app.config['POSTS_PER_PAGE'],False)
+	next_url = url_for('transactions',page=transactions.next_num) \
+		if transactions.has_next else None
+	print(next_url)
+	prev_url = url_for('transactions',page=transactions.prev_num) \
+		if transactions.has_prev else None
+
+	allTrans = Transaction.query.filter_by(payer = current_user,recurring=True).all()
+
+	return render_template('user.html',user=user,transactions=transactions.items,form=form,
+		title="Profile",allTrans=allTrans,next_url=next_url,prev_url=prev_url)
+
+"""
 @app.route('/user/<username>',methods=['GET','POST'])
 @login_required
 def user(username):
@@ -70,11 +107,21 @@ def user(username):
 		
 		db.session.add(t)
 		db.session.commit()
+
 		return redirect(url_for('user',username=current_user.username))
-	transactions = Transaction.query.filter_by(payer = current_user,recurring=False).all()
+
+	page = request.args.get('page',1,type=int)
+	transactions = Transaction.query.filter_by(payer = current_user,recurring=False).paginate(
+		page,app.config['POSTS_PER_PAGE'],False)
+	next_url = url_for('user',username=username,page=transactions.next_num) \
+		if transactions.has_next else None
+	prev_url = url_for('user',username=username,page=transactions.prev_num) \
+		if transactions.has_prev else None
 	allTrans = Transaction.query.filter_by(payer = current_user,recurring=True).all()
-	return render_template('user.html',user=user,transactions=transactions,form=form,title="Profile",allTrans=allTrans)
-	#return render_template('user.html',user=user,transactions=transactions,form=form)
+
+	return render_template('user.html',user=user,transactions=transactions.items,form=form,
+		title="Profile",allTrans=allTrans,next_url=next_url,prev_url=prev_url)
+"""
 
 @app.route('/delete/<int:id>/',methods=['GET','POST'])
 @login_required

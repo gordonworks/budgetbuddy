@@ -1,0 +1,46 @@
+1. DA is 0, everything is 0
+2. user adds income, DA recalculates
+3. User adds expenses, DA recalculates
+4. User adds daily purchases, subtracts from DA
+	- if purchase is more than DA, set DA to 0
+	- have option to recalculate?
+5. if the day is not matching on the DA, recalculate it
+
+
+Bugs
+-------------------------------------------------
+[X]Bug: deletion on /user/username redirects to just user
+	- change /user/username to just transactions? don't need the custom username page
+	X - changed /user/username to /transactions
+[X]Bug: deletion on /transactions?page=2 redirects to /transactions
+	X - changed next = request.full_path in _transactions	
+
+Add Features
+-------------------------------------------------
+[X]Pagination for transactions
+	-https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-ix-pagination
+
+[]Add edit button and edit page to transactions
+	-add html button in _transactions.html to send to /edit page with a next? args
+	-add /edit page in routes, user is current user and addtransaction form is the form
+	-add edit.html using addtransactionform with a submit link
+
+[]Enforce $AB.CD formatting for DA, transaction amounts
+
+[]Add ability to rollover recurring transactions after month is over
+	- upon logging in/going to index page - check month of DA versus current month
+		>if they don't match,
+			-ditch the non-recurring transactions(or move to previous month table?)
+			-change the recurring transactions to move up a month
+			-if the day is invalid move it to the latest day on the month
+			-recalculate DA
+	
+[]Add a first time budget setup script
+
+[]Put a dashboard on index page with stats
+
+[]Change notes into categories OR add a category along with notes - for fun pie chart stats n such
+
+[]Beautify - REST API/BOOTSTRAP
+
+[]Stylize recurring transactions different than nonrecurring on transaction page
