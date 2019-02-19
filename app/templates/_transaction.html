@@ -1,12 +1,15 @@
-<tr>
+
 	<td>
 		<img src="{{ transaction.payer.avatar(36) }}">
 		{{ transaction.payer.username }}
 	</td>
 	<td>{{ transaction.amount }}</td>
 	<td>{{ transaction.note }}</td>
+	<td>{{ transaction.timestamp }}</td>
 	<td>
 		<button onclick="window.location.href='{{ url_for("delete",id=transaction.id,next=request.full_path) }}';">Delete</button>
 	</td>
-	<td>{{ transaction.timestamp }}</td>
-</tr>
+	<td>
+		<button onclick="window.location.href='{{ url_for("edit",id=transaction.id,next=request.full_path) }}';">Edit</button>
+	</td>
+

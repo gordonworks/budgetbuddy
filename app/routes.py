@@ -56,72 +56,39 @@ def register():
 def transactions():
 	user = User.query.filter_by(username=current_user.username).first_or_404()
 	form = AddTransactionForm()
+
+	#recalculate daily amount if the day is stale
 	if user.dA_timestamp.day != datetime.today().day:
 		daily_amount = calc_DA(current_user)
 	if form.validate_on_submit():
-		t = Transaction(note=form.note.data,amount='-'+form.amount.data,
+		formatted_amount = f'{float(form.amount.data):.2f}'
+		t = Transaction(note=form.note.data,amount='-'+formatted_amount,
 			recurring=False,payer=current_user,timestamp=form.dt.data)
 		#if there was no timestamp selected, then we will subtract from the daily allowance
 		if not t.timestamp:
-			f = float(user.daily_allowance)
+			f = float(user.daily_allowance) if user.daily_allowance else 0
 			user.daily_allowance = str(f+float(t.amount))
 		else:
 			user.daily_allowance = calc_DA(current_user)
-		
 		db.session.add(t)
 		db.session.commit()
 		return redirect(url_for('transactions'))
 
+	#pagination logic
 	page = request.args.get('page',1,type=int)
 	transactions = Transaction.query.filter_by(
 		payer = current_user,recurring=False).order_by(Transaction.timestamp.desc()).paginate(
 		page,app.config['POSTS_PER_PAGE'],False)
 	next_url = url_for('transactions',page=transactions.next_num) \
 		if transactions.has_next else None
-	print(next_url)
 	prev_url = url_for('transactions',page=transactions.prev_num) \
 		if transactions.has_prev else None
 
+	#generating the light blue recurring transactions on the page
 	allTrans = Transaction.query.filter_by(payer = current_user,recurring=True).all()
 
 	return render_template('user.html',user=user,transactions=transactions.items,form=form,
 		title="Profile",allTrans=allTrans,next_url=next_url,prev_url=prev_url)
-
-"""
-@app.route('/user/<username>',methods=['GET','POST'])
-@login_required
-def user(username):
-	user = User.query.filter_by(username=username).first_or_404()
-	form = AddTransactionForm()
-	if user.dA_timestamp.day != datetime.today().day:
-		daily_amount = calc_DA(current_user)
-	if form.validate_on_submit():
-		t = Transaction(note=form.note.data,amount='-'+form.amount.data,
-			recurring=False,payer=current_user,timestamp=form.dt.data)
-		#if there was no timestamp selected, then we will subtract from the daily allowance
-		if not t.timestamp:
-			f = float(user.daily_allowance)
-			user.daily_allowance = str(f+float(t.amount))
-		else:
-			user.daily_allowance = calc_DA(current_user)
-		
-		db.session.add(t)
-		db.session.commit()
-
-		return redirect(url_for('user',username=current_user.username))
-
-	page = request.args.get('page',1,type=int)
-	transactions = Transaction.query.filter_by(payer = current_user,recurring=False).paginate(
-		page,app.config['POSTS_PER_PAGE'],False)
-	next_url = url_for('user',username=username,page=transactions.next_num) \
-		if transactions.has_next else None
-	prev_url = url_for('user',username=username,page=transactions.prev_num) \
-		if transactions.has_prev else None
-	allTrans = Transaction.query.filter_by(payer = current_user,recurring=True).all()
-
-	return render_template('user.html',user=user,transactions=transactions.items,form=form,
-		title="Profile",allTrans=allTrans,next_url=next_url,prev_url=prev_url)
-"""
 
 @app.route('/delete/<int:id>/',methods=['GET','POST'])
 @login_required
@@ -158,7 +125,8 @@ def expenses():
 	transactions = Transaction.query.filter(Transaction.recurring==True,Transaction.amount<='0',
 		Transaction.payer==current_user).all()
 	if form.validate_on_submit():
-		t = Transaction(note=form.note.data,amount='-'+form.amount.data,
+		formatted_amount = f'{float(form.amount.data):.2f}'
+		t = Transaction(note=form.note.data,amount='-'+formatted_amount,
 			recurring=True,payer=current_user,timestamp=form.dt.data)
 		user.daily_allowance = calc_DA(current_user)
 		user.dA_timestamp = date.today()
@@ -177,7 +145,8 @@ def income():
 	transactions = Transaction.query.filter(Transaction.amount>='0',
 		Transaction.payer==current_user).all()
 	if form.validate_on_submit():
-		t = Transaction(note=form.note.data,amount=form.amount.data,
+		formatted_amount = f'{float(form.amount.data):.2f}'
+		t = Transaction(note=form.note.data,amount=formatted_amount,
 			recurring=True,payer=current_user,timestamp=form.dt.data)
 		user.daily_allowance = calc_DA(current_user)
 		user.dA_timestamp = date.today()
@@ -242,3 +211,36 @@ def results():
 		db.session.commit()
 		return redirect(url_for('results'))
 	return render_template('results.html',table=table,form=form)
+
+@app.route('/edit/<int:id>/',methods=['GET','POST'])
+@login_required
+def edit(id):
+	user =  User.query.filter_by(username=current_user.username).first_or_404()
+	transaction = Transaction.query.filter_by(id=id).first_or_404()
+	form = AddTransactionForm()
+	#differentiating income/expenses and preserving negative sign
+	neg = ''
+	if transaction.amount < 0:
+		neg = '-'
+		transaction.amount = 0-transaction.amount
+	
+	if form.validate_on_submit():
+		if 'cancel_button' in request.form:
+			print('edit canceled')
+		else:
+			transaction.note=form.note.data
+			transaction.amount=neg+form.amount.data
+			transaction.timestamp=form.dt.data
+
+			user.daily_allowance = calc_DA(current_user)
+			user.dA_timestamp = date.today()
+
+			db.session.commit()
+
+		#ensures editing a transaction preserves the current page
+		next_page = request.args.get('next')
+		if not next_page or url_parse(next_page).netloc != '':
+				next_page = url_for('user',username=current_user.username)
+		return redirect(next_page)
+
+	return render_template('edit.html',transaction=transaction,form=form,title="Edit")

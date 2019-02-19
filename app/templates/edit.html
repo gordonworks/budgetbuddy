@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<form action="" method="post">
+		{{form.hidden_tag() }}
+		{{ form.amount(size=10,value=transaction.amount) }}<br>
+		{{ form.note(size=10,value=transaction.note) }}<br>
+		{{ form.dt(class_='datepicker',value=transaction.timestamp.date()) }}<br>
+		{{ form.add() }}
+		<input type = "submit" name="cancel_button" value="Cancel">
+	</form>
+{% endblock %}

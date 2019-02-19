@@ -14,18 +14,27 @@ Bugs
 	X - changed /user/username to /transactions
 [X]Bug: deletion on /transactions?page=2 redirects to /transactions
 	X - changed next = request.full_path in _transactions	
+[X]Bug: user can enter negative values and screw with entire program
+	X - regex restricted to number only formats
 
 Add Features
 -------------------------------------------------
+[] Enforce correct maths:
+	- have daily amounts updated correctly when deleting, editing
+	- currently editing a transaction recalculates DA instead of just subtracting the correct number
+
 [X]Pagination for transactions
 	-https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-ix-pagination
 
-[]Add edit button and edit page to transactions
+[X]Add edit button and edit page to transactions
 	-add html button in _transactions.html to send to /edit page with a next? args
+	-add an extra <th> object in user.html
 	-add /edit page in routes, user is current user and addtransaction form is the form
 	-add edit.html using addtransactionform with a submit link
 
-[]Enforce $AB.CD formatting for DA, transaction amounts
+[X?]Enforce $AB.CD formatting for DA, transaction amounts
+	-formatting restricted to AB.CD
+	-although AB.00 formats to AB, likely not an issue
 
 []Add ability to rollover recurring transactions after month is over
 	- upon logging in/going to index page - check month of DA versus current month
@@ -40,7 +49,9 @@ Add Features
 []Put a dashboard on index page with stats
 
 []Change notes into categories OR add a category along with notes - for fun pie chart stats n such
+	- https://www.blog.pythonlibrary.org/2017/12/14/flask-101-adding-editing-and-displaying-data/
+	- food, housing, income, entertainment, education, shopping, personal care, health,kids, investments, utilities, taxes
 
 []Beautify - REST API/BOOTSTRAP
 
-[]Stylize recurring transactions different than nonrecurring on transaction page
+[X]Stylize recurring transactions different than nonrecurring on transaction page

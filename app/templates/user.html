@@ -24,19 +24,24 @@
 		<th>User</th>
 		<th>Amount</th>
 		<th>Note</th>
-		<th>Button</th>
 		<th>Date</th>
+		<th>EditBtn</th>
+		<th>DeleteBtn</th>
 	</tr>
 
 	{% if title=="Profile" %}
 		{% for transaction in allTrans %}
+			<tr style="background-color: lightblue;">
 			{% include '_transaction.html' %}
+			</tr>
 		{% endfor %}
 	{% endif %}
 
 
 	{% for transaction in transactions %}
+		<tr>
 		{% include '_transaction.html' %}
+		</tr>
 	{% endfor %}
 
 	<form action="" method="post">

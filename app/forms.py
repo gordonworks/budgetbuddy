@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.fields.html5 import DateField
 #from wtforms import DateField
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Optional
+from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Optional, Regexp
 from app.models import User
 
 class LoginForm(FlaskForm):
@@ -31,7 +31,8 @@ class RegistrationForm(FlaskForm):
 			raise ValidationError('Email taken. Use another.')
 
 class AddTransactionForm(FlaskForm):
-	amount = StringField('Amount', validators = [DataRequired()])
+	amount = StringField('Amount', validators = [
+		DataRequired(), Regexp('\d+(\.\d\d)?', message='Must be in monetary format')])
 	note = StringField('Note', validators = [DataRequired()])
 	add = SubmitField('Add')
 	#dt = DateField('DatePicker', format='%Y-%m-%d',validators = [DataRequired()])
