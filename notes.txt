@@ -6,6 +6,7 @@
 	- have option to recalculate?
 5. if the day is not matching on the DA, recalculate it
 
+https://github.com/tuvtran/project-based-learning/blob/master/README.md#python
 
 Bugs
 -------------------------------------------------
@@ -19,7 +20,7 @@ Bugs
 
 Add Features
 -------------------------------------------------
-[] Enforce correct maths:
+[X?] Enforce correct maths:
 	- have daily amounts updated correctly when deleting, editing
 	- currently editing a transaction recalculates DA instead of just subtracting the correct number
 

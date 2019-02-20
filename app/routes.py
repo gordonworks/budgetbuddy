@@ -6,6 +6,7 @@ from app.models import User,Transaction
 from werkzeug.urls import url_parse
 from app.maths import calc_DA
 from datetime import date, datetime
+from calendar import monthrange
 from app.tables import Results
 
 @app.route('/')
@@ -56,7 +57,7 @@ def register():
 def transactions():
 	user = User.query.filter_by(username=current_user.username).first_or_404()
 	form = AddTransactionForm()
-
+	daysInMonth = monthrange(datetime.today().year,datetime.today().month)[1] - datetime.today().day
 	#recalculate daily amount if the day is stale
 	if user.dA_timestamp.day != datetime.today().day:
 		daily_amount = calc_DA(current_user)
@@ -65,11 +66,8 @@ def transactions():
 		t = Transaction(note=form.note.data,amount='-'+formatted_amount,
 			recurring=False,payer=current_user,timestamp=form.dt.data)
 		#if there was no timestamp selected, then we will subtract from the daily allowance
-		if not t.timestamp:
-			f = float(user.daily_allowance) if user.daily_allowance else 0
-			user.daily_allowance = str(f+float(t.amount))
-		else:
-			user.daily_allowance = calc_DA(current_user)
+		user.daily_allowance = calc_DA(current_user)
+
 		db.session.add(t)
 		db.session.commit()
 		return redirect(url_for('transactions'))
@@ -84,11 +82,17 @@ def transactions():
 	prev_url = url_for('transactions',page=transactions.prev_num) \
 		if transactions.has_prev else None
 
+	total = 0.0
+	for t in transactions.items:
+		if t.timestamp.date() == datetime.today().date():
+			total = total+t.amount
+	total = 0-total
+
 	#generating the light blue recurring transactions on the page
 	allTrans = Transaction.query.filter_by(payer = current_user,recurring=True).all()
 
 	return render_template('user.html',user=user,transactions=transactions.items,form=form,
-		title="Profile",allTrans=allTrans,next_url=next_url,prev_url=prev_url)
+		title="Profile",allTrans=allTrans,next_url=next_url,prev_url=prev_url,dim=daysInMonth,today=total)
 
 @app.route('/delete/<int:id>/',methods=['GET','POST'])
 @login_required
@@ -97,16 +101,8 @@ def delete(id):
 	user = User.query.filter_by(username=current_user.username).first_or_404()
 	db.session.delete(t)
 	db.session.commit()
-	#deleting will subtract from the DA or recalculate its new value
 	
-	#THIS CAUSES A 404 on the user page - possibly fixed?
-	if t.recurring:
-		user.daily_allowance = calc_DA(current_user)
-	elif t.timestamp.day != datetime.today().day:
-		user.daily_allowance = calc_DA(current_user)
-	else:
-		f = float(user.daily_allowance)
-		user.daily_allowance = str(f-float(t.amount))
+	user.daily_allowance = calc_DA(current_user)
 	db.session.commit()
 	#ensures deleting a transaction preserves the current page
 	next_page = request.args.get('next')
@@ -121,6 +117,7 @@ def delete(id):
 def expenses():
 	form = AddTransactionForm()
 	user = User.query.filter_by(username=current_user.username).first_or_404()
+	daysInMonth = monthrange(datetime.today().year,datetime.today().month)[1] - datetime.today().day
 	#transactions = Transaction.query.filter_by(recurring=True).all()
 	transactions = Transaction.query.filter(Transaction.recurring==True,Transaction.amount<='0',
 		Transaction.payer==current_user).all()
@@ -134,13 +131,14 @@ def expenses():
 		db.session.commit()
 		return redirect(url_for('expenses'))
 	return render_template('user.html',username=user.username,
-		user=user,transactions=transactions,form=form,title="Expenses")
+		user=user,transactions=transactions,form=form,title="Expenses",dim=daysInMonth)
 
 @app.route('/income',methods=['GET','POST'])
 @login_required
 def income():
 	form = AddTransactionForm()
 	user = User.query.filter_by(username=current_user.username).first_or_404()
+	daysInMonth = monthrange(datetime.today().year,datetime.today().month)[1] - datetime.today().day
 	#transactions = Transaction.query.filter_by(recurring=True).all()
 	transactions = Transaction.query.filter(Transaction.amount>='0',
 		Transaction.payer==current_user).all()
@@ -154,7 +152,7 @@ def income():
 		db.session.commit()
 		return redirect(url_for('income'))
 	return render_template('user.html',username=user.username,user=user,
-		transactions=transactions,form=form,title="Income")
+		transactions=transactions,form=form,title="Income",dim=daysInMonth)
 
 @app.route('/new_entry',methods=['GET','POST'])
 @login_required
@@ -224,6 +222,7 @@ def edit(id):
 		neg = '-'
 		transaction.amount = 0-transaction.amount
 	
+	#cancel button vs save button
 	if form.validate_on_submit():
 		if 'cancel_button' in request.form:
 			print('edit canceled')
