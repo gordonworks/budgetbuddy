@@ -13,4 +13,6 @@ def calc_DA(user, daily=True):
 		total_DA+=float(t.amount)
 	if daily:
 		total_DA = total_DA/daysInMonth
-	return repr(total_DA)
+
+	total_DA = f'{total_DA:.2f}'
+	return total_DA

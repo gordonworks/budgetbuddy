@@ -64,7 +64,7 @@ def transactions():
 	if form.validate_on_submit():
 		formatted_amount = f'{float(form.amount.data):.2f}'
 		t = Transaction(note=form.note.data,amount='-'+formatted_amount,
-			recurring=False,payer=current_user,timestamp=form.dt.data)
+			recurring=False,payer=current_user,category=form.category.data,timestamp=form.dt.data)
 		#if there was no timestamp selected, then we will subtract from the daily allowance
 		user.daily_allowance = calc_DA(current_user)
 
@@ -83,7 +83,8 @@ def transactions():
 		if transactions.has_prev else None
 
 	total = 0.0
-	for t in transactions.items:
+	dayTrans = Transaction.query.filter_by(recurring=False)
+	for t in dayTrans:
 		if t.timestamp.date() == datetime.today().date():
 			total = total+t.amount
 	total = 0-total
@@ -124,7 +125,7 @@ def expenses():
 	if form.validate_on_submit():
 		formatted_amount = f'{float(form.amount.data):.2f}'
 		t = Transaction(note=form.note.data,amount='-'+formatted_amount,
-			recurring=True,payer=current_user,timestamp=form.dt.data)
+			recurring=True,payer=current_user,category=form.category.data,timestamp=form.dt.data)
 		user.daily_allowance = calc_DA(current_user)
 		user.dA_timestamp = date.today()
 		db.session.add(t)
@@ -145,7 +146,7 @@ def income():
 	if form.validate_on_submit():
 		formatted_amount = f'{float(form.amount.data):.2f}'
 		t = Transaction(note=form.note.data,amount=formatted_amount,
-			recurring=True,payer=current_user,timestamp=form.dt.data)
+			recurring=True,payer=current_user,category=form.category.data,timestamp=form.dt.data)
 		user.daily_allowance = calc_DA(current_user)
 		user.dA_timestamp = date.today()
 		db.session.add(t)
@@ -230,6 +231,7 @@ def edit(id):
 			transaction.note=form.note.data
 			transaction.amount=neg+form.amount.data
 			transaction.timestamp=form.dt.data
+			transaction.category=form.category.data
 
 			user.daily_allowance = calc_DA(current_user)
 			user.dA_timestamp = date.today()

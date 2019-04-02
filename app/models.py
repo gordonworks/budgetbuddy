@@ -38,6 +38,7 @@ class Transaction(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	note = db.Column(db.String(16))
 	amount = db.Column(db.String(16))
+	category = db.Column(db.String(32))
 	timestamp = db.Column(db.DateTime,index=True,default=datetime.utcnow)
 	recurring = db.Column(db.Boolean)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

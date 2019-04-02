@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField,SelectField
 from wtforms.fields.html5 import DateField
 #from wtforms import DateField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Optional, Regexp
@@ -36,4 +36,10 @@ class AddTransactionForm(FlaskForm):
 	note = StringField('Note', validators = [DataRequired()])
 	add = SubmitField('Add')
 	#dt = DateField('DatePicker', format='%Y-%m-%d',validators = [DataRequired()])
+	category = SelectField(
+		'Category',
+		choices=[('groceries','Groceries'),('restaurant','Restaurant'),('income','Income'),
+		('entertainment','Entertainment'),('education','Education'),('shopping','Shopping'),
+		('rent','Rent/Mortgage'),('taxes','Taxes'),('investments','Investments'),
+		('health','Health'),('personal','Personal Care'),('interest','Credit Cards/Loans')])
 	dt = DateField('DatePicker', format='%Y-%m-%d', validators = [Optional()])

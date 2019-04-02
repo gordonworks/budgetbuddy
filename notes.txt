@@ -20,6 +20,16 @@ Bugs
 
 Add Features
 -------------------------------------------------
+[X]Add categories to transactions
+	- add prepopulated dropdown list of selectable categories (later - add ability to add categories?)
+	- food, housing, income, entertainment, education, shopping, personal care, health,kids, investments, utilities, taxes
+	- Stringfield on transaction model
+
+[]Add charts for fun data visuals
+	-Charts.JS a possiblity
+
+[]Add separate page(results?) that shows 2 tables, one with recurring and one with nonrecurring transactions
+
 [X?] Enforce correct maths:
 	- have daily amounts updated correctly when deleting, editing
 	- currently editing a transaction recalculates DA instead of just subtracting the correct number
@@ -49,10 +59,9 @@ Add Features
 
 []Put a dashboard on index page with stats
 
-[]Change notes into categories OR add a category along with notes - for fun pie chart stats n such
-	- https://www.blog.pythonlibrary.org/2017/12/14/flask-101-adding-editing-and-displaying-data/
-	- food, housing, income, entertainment, education, shopping, personal care, health,kids, investments, utilities, taxes
 
-[]Beautify - REST API/BOOTSTRAP
+[X?]Beautify - REST API/BOOTSTRAP
+	-WIP
+
 
 [X]Stylize recurring transactions different than nonrecurring on transaction page

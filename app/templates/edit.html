@@ -5,6 +5,7 @@
 		{{form.hidden_tag() }}
 		{{ form.amount(size=10,value=transaction.amount) }}<br>
 		{{ form.note(size=10,value=transaction.note) }}<br>
+		{{ form.category(size=10,value=transaction.category) }}<br>
 		{{ form.dt(class_='datepicker',value=transaction.timestamp.date()) }}<br>
 		{{ form.add() }}
 		<input type = "submit" name="cancel_button" value="Cancel">

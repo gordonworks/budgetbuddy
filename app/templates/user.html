@@ -1,33 +1,52 @@
 {% extends "base.html" %}
 
-{% block content %}
-	<table>
+{% block app_content %}
+	<table class="table" style="border-collapse: collapse;">
 		<tr valign="top">
-			<td><img src="{{ user.avatar(128) }}"></td>
-			<td><h1>User: {{ user.username }} editing {{ title }}</h1></td>
+			<td width="128px"><img src="{{ user.avatar(128) }}"></td>
+			<td><h1>{{ user.username }}'s {{ title }}</h1></td>
 		</tr>
 		{% if title=="Profile" %}
-			<tr><td><h2>Daily Amount: {{ user.daily_allowance }} </h2></td></tr>
-			<tr><td><h2>Spent Today: {{ today }} </h2></td></tr>
-			
-			<tr><td><h2>Cash Left: {{ user.daily_allowance*dim }} </h2></td></tr>
-		
-			<tr><td><a href="{{ url_for('expenses') }}">Edit Monthly Expenses</a></td></tr>
-			<tr><td><a href="{{ url_for('income') }}">Add Monthly Income</a></td></tr>
-		{% elif title=="Expenses" %}
-			<tr><td><a href="{{ url_for('transactions') }}">Add Transactions</a></td></tr>
-			<tr><td><a href="{{ url_for('income') }}">Add Monthly Income</a></td></tr>
-		{% else %}
-			<tr><td><a href="{{ url_for('transactions') }}">Add Transactions</a></td></tr>
-			<tr><td><a href="{{ url_for('expenses') }}">Edit Monthly Expenses</a></td></tr>
-		{% endif %}
+		<tr style="text-align:left;">
+			<th colspan="2" class = "success"><h2>Daily Amount:</h2></th>
+			<th colspan="2" class = "warning"><h2>Spent Today:</h2></th>
+			<th colspan="2" class = "danger"><h2>Cash Left: </h2></th>
+		</tr>
+		<tr style="text-align:left;">
+			<td colspan="2" class = "success"><h2>{{ '$'+'{:.2f}'.format(user.daily_allowance) }} </h2></td>
+			<td colspan="2" class = "warning"><h2>{{ '$'+'{:.2f}'.format(today) }} </h2></td>
+			{% if user.daily_allowance %}
+			<td colspan="2" class = "danger"><h2>{{ '$'+'{:.2f}'.format(user.daily_allowance*dim) }} </h2></td>
+			{% endif %}
+		</tr>
 	</table>
-	<hr>
-	<table style="width:100%">
+		{% endif %}
+		{% if title=="Profile" %}
+		<ul class="nav nav-tabs">
+			<li role="presentation" class="active"><a href="{{ url_for('transactions') }}">Transactions</a></li>
+			<li role="presentation" ><a href="{{ url_for('expenses') }}">Expenses</a></li>
+			<li role="presentation" ><a href="{{ url_for('income') }}">Income</a></li>
+		</ul>
+		{% elif title=="Expenses" %}
+		<ul class="nav nav-tabs">
+			<li role="presentation"><a href="{{ url_for('transactions') }}">Transactions</a></li>
+			<li role="presentation" class="active" ><a href="{{ url_for('expenses') }}">Expenses</a></li>
+			<li role="presentation" ><a href="{{ url_for('income') }}">Income</a></li>
+		</ul>
+		{% else %}
+		<ul class="nav nav-tabs">
+			<li role="presentation"><a href="{{ url_for('transactions') }}">Transactions</a></li>
+			<li role="presentation" ><a href="{{ url_for('expenses') }}">Expenses</a></li>
+			<li role="presentation" class="active" ><a href="{{ url_for('income') }}">Income</a></li>
+		</ul>
+		{% endif %}
+	
+	<table class = "table table-hover">
 	<tr>
 		<th>User</th>
 		<th>Amount</th>
 		<th>Note</th>
+		<th>Category</th>
 		<th>Date</th>
 		<th>EditBtn</th>
 		<th>DeleteBtn</th>
@@ -55,6 +74,7 @@
 		<td>{{ form.add() }}</td>
 		<td>{{ form.amount(size=10) }}</td>
 		<td>{{ form.note(size=10) }}</td>
+		<td>{{ form.category() }}</td>
 		<td>{{ form.dt(class_='datepicker') }}</td>
 	</tr>
 
@@ -62,10 +82,19 @@
 
 	</form>
 	</table>
-	{% if prev_url %}
-	<a href="{{ prev_url }}">Newer Transactions</a>
-	{% endif %}
-	{% if next_url %}
-	<a href="{{ next_url }}">Older Transactions</a>
-	{% endif %}
+	
+	<nav aria-label="...">
+		<ul class="pager">
+			<li class="previous{% if not prev_url %} disabled{% endif %}">
+				<a href="{{ prev_url or '#' }}">
+					<span aria-hidden="true">&larr;</span> Newer posts
+				</a>
+			</li>
+			<li class="next{% if not next_url %} disabled{% endif %}">
+				<a href="{{ next_url or '#' }}">
+					Older posts <span aria-hidden="true">&rarr;</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
 {% endblock %}
