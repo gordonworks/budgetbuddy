@@ -7,7 +7,7 @@ from werkzeug.urls import url_parse
 from app.maths import calc_DA
 from datetime import date, datetime
 from calendar import monthrange
-from app.tables import Results
+import pygal
 
 @app.route('/')
 @app.route('/index')
@@ -146,7 +146,7 @@ def income():
 	if form.validate_on_submit():
 		formatted_amount = f'{float(form.amount.data):.2f}'
 		t = Transaction(note=form.note.data,amount=formatted_amount,
-			recurring=True,payer=current_user,category=form.category.data,timestamp=form.dt.data)
+			recurring=True,payer=current_user,category='income',timestamp=form.dt.data)
 		user.daily_allowance = calc_DA(current_user)
 		user.dA_timestamp = date.today()
 		db.session.add(t)
@@ -199,17 +199,11 @@ def new_entry():
 @login_required
 def results():
 	user = User.query.filter_by(username=current_user.username).first_or_404()
-	transactions = Transaction.query.filter_by(payer=current_user).all()
-	table = Results(transactions)
+	trans = Transaction.query.filter_by(payer=current_user).filter_by(recurring=False).all()
+	allTrans = Transaction.query.filter_by(payer=current_user).filter_by(recurring=True).all()
 
-	form = AddTransactionForm()
-	if form.validate_on_submit():
-		t = Transaction(note=form.note.data,amount='-'+form.amount.data,
-			recurring=False,payer=current_user,timestamp=form.dt.data)
-		db.session.add(t)
-		db.session.commit()
-		return redirect(url_for('results'))
-	return render_template('results.html',table=table,form=form)
+	
+	return render_template('results.html',trans=trans,allTrans=allTrans)
 
 @app.route('/edit/<int:id>/',methods=['GET','POST'])
 @login_required
@@ -245,3 +239,27 @@ def edit(id):
 		return redirect(next_page)
 
 	return render_template('edit.html',transaction=transaction,form=form,title="Edit")
+
+
+@app.route('/charts',methods=['GET','POST'])
+@login_required
+def charts():
+	trans_dict = dict()
+	transactions = Transaction.query.filter_by(payer=current_user).all()
+	#Gathering all negative transactions for the spending pie chart
+	for t in transactions:
+		if t.amount > 0:
+			pass
+		elif t.category in trans_dict:
+			trans_dict[t.category] += -t.amount
+		else:
+			trans_dict[t.category] = -t.amount
+
+	graph = pygal.Pie()
+	graph.title = 'Spending by category'
+
+	for k,v in trans_dict.items():
+		graph.add(k,v)
+
+	graph_data = graph.render_data_uri()
+	return render_template("charts.html", graph_data = graph_data)

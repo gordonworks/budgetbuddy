@@ -1,17 +1,47 @@
 {% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
 <title>Results Database</title>
-{{ table }}
-
-<form action="" method="post">
-	{{form.hidden_tag() }}
-	<tr>
-		<td>{{ form.add() }}</td>
-		<td>{{ form.amount(size=10) }}</td>
-		<td>{{ form.note(size=10) }}</td>
-		<td>{{ form.dt(class_='datepicker') }}</td>
-	</tr>
-</form>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-6">
+			<table class ="table table-striped">
+				<thead>
+					<th scope="col">Note</th>
+					<th scope="col">Amount</th>
+					<th scope="col">Category</th>
+				</thead>
+				<tbody>
+			{% for transaction in allTrans %}
+				<tr>
+					<td>{{ transaction.note }}</td>
+					<td>{{ '$'+'{:.2f}'.format(transaction.amount) }}</td>
+					<td>{{ transaction.category }}</td>
+				</tr>
+			{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="col-xs-6">
+			<table class ="table table-striped">
+				<thead>
+					<th scope="col">Note</th>
+					<th scope="col">Amount</th>
+					<th scope="col">Category</th>
+				</thead>
+				<tbody>
+			{% for transaction in trans %}
+				<tr>
+					<td>{{ transaction.note }}</td>
+					<td>{{ '$'+'{:.2f}'.format(transaction.amount) }}</td>
+					<td>{{ transaction.category }}</td>
+				</tr>
+			{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
 
 {% endblock %}

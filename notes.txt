@@ -26,7 +26,7 @@ Add Features
 	- Stringfield on transaction model
 
 []Add charts for fun data visuals
-	-Charts.JS a possiblity
+	-pygal http://pygal.org/en/stable/documentation/index.html
 
 []Add separate page(results?) that shows 2 tables, one with recurring and one with nonrecurring transactions
 
