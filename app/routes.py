@@ -195,15 +195,13 @@ def new_entry():
 
 	return render_template('new_entry.html',user=user,transactions=transactions,form=form)
 
-@app.route('/results',methods=['GET','POST'])
+@app.route('/results')
 @login_required
 def results():
-	user = User.query.filter_by(username=current_user.username).first_or_404()
-	trans = Transaction.query.filter_by(payer=current_user).filter_by(recurring=False).all()
-	allTrans = Transaction.query.filter_by(payer=current_user).filter_by(recurring=True).all()
+	allTrans = Transaction.query.filter_by(payer=current_user).filter(Transaction.amount<=0).all()
 
 	
-	return render_template('results.html',trans=trans,allTrans=allTrans)
+	return render_template('results.html',allTrans=allTrans)
 
 @app.route('/edit/<int:id>/',methods=['GET','POST'])
 @login_required
@@ -255,11 +253,12 @@ def charts():
 		else:
 			trans_dict[t.category] = -t.amount
 
+
 	graph = pygal.Pie()
 	graph.title = 'Spending by category'
-
 	for k,v in trans_dict.items():
 		graph.add(k,v)
+
 
 	graph_data = graph.render_data_uri()
 	return render_template("charts.html", graph_data = graph_data)

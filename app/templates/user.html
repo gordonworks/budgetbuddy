@@ -13,9 +13,9 @@
 			<th colspan="2" class = "danger"><h2>Cash Left: </h2></th>
 		</tr>
 		<tr style="text-align:left;">
+			{% if user.daily_allowance %}
 			<td colspan="2" class = "success"><h2>{{ '$'+'{:.2f}'.format(user.daily_allowance) }} </h2></td>
 			<td colspan="2" class = "warning"><h2>{{ '$'+'{:.2f}'.format(today) }} </h2></td>
-			{% if user.daily_allowance %}
 			<td colspan="2" class = "danger"><h2>{{ '$'+'{:.2f}'.format(user.daily_allowance*dim) }} </h2></td>
 			{% endif %}
 		</tr>
@@ -41,15 +41,15 @@
 		</ul>
 		{% endif %}
 	
-	<table class = "table table-hover">
+	<table class = "table table-hover table-sm ">
 	<tr>
 		<th>User</th>
 		<th>Amount</th>
-		<th>Note</th>
 		<th>Category</th>
 		<th>Date</th>
 		<th>EditBtn</th>
 		<th>DeleteBtn</th>
+		<th>Note</th>
 	</tr>
 <!--
 	{% if title=="Profile" %}
@@ -71,11 +71,13 @@
 		{{form.hidden_tag() }}
 
 	<tr>
-		<td>{{ form.add() }}</td>
-		<td>{{ form.amount(size=10) }}</td>
-		<td>{{ form.note(size=10) }}</td>
+		<td>{{ current_user.username }}</td>
+		<td>${{ form.amount(size=10) }}</td>
 		<td>{{ form.category() }}</td>
 		<td>{{ form.dt(class_='datepicker') }}</td>
+		<td>{{ form.add(value="Add Transaction") }}</td>
+		<td>Note:</td>
+		<td>{{ form.note(size=13,id='notes') }}</td>
 	</tr>
 
 	
