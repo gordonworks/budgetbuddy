@@ -18,28 +18,24 @@
 				<tr>
 					<td>{{ transaction.note }}</td>
 					<td>{{ '$'+'{:.2f}'.format(transaction.amount) }}</td>
-					<td>{{ transaction.category }}</td>
+					<td><a href="{{ url_for('results',category=transaction.category) }}">{{ transaction.category }}</a></td>
 					<td>{{ transaction.timestamp }}</td>
 				</tr>
 			{% endfor %}
+				<tr>Total: {{ '$'+'{:.2f}'.format(total)}}</tr>
 				</tbody>
 			</table>
 		</div>
 		<div class="col-xs-6">
-			<table class ="table table-striped">
+			<table class ="table table-sm">
 				<thead>
-					<th scope="col">Note</th>
-					<th scope="col">Amount</th>
 					<th scope="col">Category</th>
-					<th scope="col">Date</th>
 				</thead>
 				<tbody>
-			{% for transaction in allTrans %}
+				<tr><td><a href="{{ url_for('results',category='all') }}">All</a></td>
+			{% for item in loc %}
 				<tr>
-					<td>{{ transaction.note }}</td>
-					<td>{{ '$'+'{:.2f}'.format(transaction.amount) }}</td>
-					<td>{{ transaction.category }}</td>
-					<td>{{ transaction.timestamp }}</td>
+					<td><a href="{{ url_for('results',category=item[0]) }}">{{ item[1] }}</td>
 				</tr>
 			{% endfor %}
 				</tbody>

@@ -195,13 +195,18 @@ def new_entry():
 
 	return render_template('new_entry.html',user=user,transactions=transactions,form=form)
 
-@app.route('/results')
+@app.route('/results/<category>')
 @login_required
-def results():
-	allTrans = Transaction.query.filter_by(payer=current_user).filter(Transaction.amount<=0).all()
-
+def results(category):
+	total=0.0
+	if category == 'all':
+		allTrans = Transaction.query.filter_by(payer=current_user).filter(Transaction.amount<=0).all()
+	else:
+		allTrans = Transaction.query.filter_by(payer=current_user).filter(Transaction.category == category).filter(Transaction.amount<=0).all()
+	for item in allTrans:
+		total-=item.amount
 	
-	return render_template('results.html',allTrans=allTrans)
+	return render_template('results.html',allTrans=allTrans,total=total,loc=AddTransactionForm.listochoices)
 
 @app.route('/edit/<int:id>/',methods=['GET','POST'])
 @login_required
@@ -209,6 +214,7 @@ def edit(id):
 	user =  User.query.filter_by(username=current_user.username).first_or_404()
 	transaction = Transaction.query.filter_by(id=id).first_or_404()
 	form = AddTransactionForm()
+	print(form.listochoices)
 	#differentiating income/expenses and preserving negative sign
 	neg = ''
 	if transaction.amount < 0:

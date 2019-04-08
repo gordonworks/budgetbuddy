@@ -24,7 +24,7 @@
 					<li><a href="{{ url_for('login') }}">Login</a></li>
 					{% else %}
 					<li><a href="{{ url_for('transactions') }}">Profile</a></li>
-					<li><a href="{{ url_for('results') }}">Results</a></li>
+					<li><a href="{{ url_for('results',category='all') }}">Results</a></li>
 					<li><a href="{{ url_for('charts') }}">Charts</a></li>
 					<li><a href="{{ url_for('logout') }}">Logout</a></li>
 					{% endif %}
