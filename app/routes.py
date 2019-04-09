@@ -199,14 +199,29 @@ def new_entry():
 @login_required
 def results(category):
 	total=0.0
+	itotal=0.0
+	#Logic for all transaction/expenses
+	#1 All or 2 using the category
 	if category == 'all':
-		allTrans = Transaction.query.filter_by(payer=current_user).filter(Transaction.amount<=0).all()
+		allTrans = Transaction.query.filter_by(payer=current_user
+			).filter(Transaction.amount<=0).order_by(Transaction.timestamp.desc()).all()
 	else:
-		allTrans = Transaction.query.filter_by(payer=current_user).filter(Transaction.category == category).filter(Transaction.amount<=0).all()
+		allTrans = Transaction.query.filter_by(payer=current_user
+			).filter(Transaction.category == category).filter(Transaction.amount<=0).order_by(Transaction.timestamp.desc()).all()
+	#Gathering up for total at top of table
 	for item in allTrans:
 		total-=item.amount
+
+	#Income transactions
+	iTrans = Transaction.query.filter_by(payer=current_user
+			).filter(Transaction.amount>=0).order_by(Transaction.timestamp.desc()).all()
+	for item in iTrans:
+		itotal+=item.amount
+
+	#slicing out income from the available categories
+	loc = AddTransactionForm.listochoices[:2]+AddTransactionForm.listochoices[3:]
 	
-	return render_template('results.html',allTrans=allTrans,total=total,loc=AddTransactionForm.listochoices)
+	return render_template('results.html',allTrans=allTrans,total=total,loc=loc,iTrans=iTrans,itotal=itotal)
 
 @app.route('/edit/<int:id>/',methods=['GET','POST'])
 @login_required

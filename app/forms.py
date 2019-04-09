@@ -39,6 +39,7 @@ class AddTransactionForm(FlaskForm):
 	listochoices = [('groceries','Groceries'),('restaurant','Restaurant'),('income','Income'),
 		('entertainment','Entertainment'),('education','Education'),('shopping','Shopping'),
 		('rent','Rent/Mortgage'),('taxes','Taxes'),('investments','Investments'),
-		('health','Health'),('personal','Personal Care'),('interest','Credit Cards/Loans')]
+		('health','Health'),('personal','Personal Care'),('interest','Credit Cards/Loans'),
+		('transportation','Transportation')]
 	category = SelectField('Category',choices=listochoices)
 	dt = DateField('DatePicker', format='%Y-%m-%d', validators = [Optional()])

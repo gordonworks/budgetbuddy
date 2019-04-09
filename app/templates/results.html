@@ -5,6 +5,25 @@
 <title>Results Database</title>
 <div class="container">
 	<div class="row">
+		<div class="col-xs-3">
+			<table class ="table table-striped">
+				<thead>
+					<th scope="col">Note</th>
+					<th scope="col">Amount</th>
+					<th scope="col">Date</th>
+				</thead>
+				<tbody>
+				{% for transaction in iTrans %}
+				<tr>
+					<td>{{ transaction.note }}</td>
+					<td>{{ '$'+'{:.2f}'.format(transaction.amount) }}</td>
+					<td>{{ transaction.timestamp }}</td>
+				</tr>
+				{% endfor %}
+				<tr>Total: {{ '$'+'{:.2f}'.format(itotal)}}</tr>
+				</tbody>
+			</table>
+		</div>
 		<div class="col-xs-6">
 			<table class ="table table-striped">
 				<thead>
@@ -26,7 +45,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="col-xs-6">
+		<div class="col-xs-3">
 			<table class ="table table-sm">
 				<thead>
 					<th scope="col">Category</th>
