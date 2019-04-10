@@ -48,7 +48,6 @@
 		<th>Category</th>
 		<th>Date</th>
 		<th>EditBtn</th>
-		<th>DeleteBtn</th>
 		<th>Note</th>
 	</tr>
 <!--
@@ -71,7 +70,6 @@
 		{{form.hidden_tag() }}
 
 	<tr>
-		<td>{{ current_user.username }}</td>
 		<td>${{ form.amount(size=10) }}</td>
 		<td>{{ form.category() }}</td>
 		<td>{{ form.dt(class_='datepicker') }}</td>

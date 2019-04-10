@@ -228,8 +228,7 @@ def results(category):
 def edit(id):
 	user =  User.query.filter_by(username=current_user.username).first_or_404()
 	transaction = Transaction.query.filter_by(id=id).first_or_404()
-	form = AddTransactionForm()
-	print(form.listochoices)
+	form = AddTransactionForm(category=transaction.category)
 	#differentiating income/expenses and preserving negative sign
 	neg = ''
 	if transaction.amount < 0:

@@ -1,13 +1,16 @@
 {% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
-{% block content %}
+{% block app_content %}
+	<div class ="form-group">
 	<form action="" method="post">
 		{{form.hidden_tag() }}
 		{{ form.amount(size=10,value=transaction.amount) }}<br>
 		{{ form.note(size=10,value=transaction.note) }}<br>
 		{{ form.category(size=10,value=transaction.category) }}<br>
 		{{ form.dt(class_='datepicker',value=transaction.timestamp.date()) }}<br>
-		{{ form.add() }}
+		{{ form.add(value="Save") }}
 		<input type = "submit" name="cancel_button" value="Cancel">
 	</form>
+	</div>
 {% endblock %}
