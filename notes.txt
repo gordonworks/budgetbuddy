@@ -20,15 +20,29 @@ Bugs
 
 Add Features
 -------------------------------------------------
-[X]Add categories to transactions
-	- add prepopulated dropdown list of selectable categories (later - add ability to add categories?)
-	- food, housing, income, entertainment, education, shopping, personal care, health,kids, investments, utilities, taxes
-	- Stringfield on transaction model
+[]Add ability to create budgets for categories to show progress on front page
+
+
 
 []Add charts for fun data visuals
 	-pygal http://pygal.org/en/stable/documentation/index.html
 
-[]Add separate page(results?) that shows 2 tables, one with recurring and one with nonrecurring transactions
+
+[]Add ability to rollover recurring transactions after month is over
+	- Also repeating frequency selection
+	- upon logging in/going to index page - check month of DA versus current month
+		>if they don't match,
+			-ditch the non-recurring transactions(or move to previous month table?)
+			-change the recurring transactions to move up a month
+			-if the day is invalid move it to the latest day on the month
+			-recalculate DA
+	
+[]Add a first time budget setup script
+
+[]Put a dashboard on index page with stats
+
+
+[X]Add separate page(results?) that shows 2 tables, one with recurring and one with nonrecurring transactions
 
 [X?] Enforce correct maths:
 	- have daily amounts updated correctly when deleting, editing
@@ -47,21 +61,11 @@ Add Features
 	-formatting restricted to AB.CD
 	-although AB.00 formats to AB, likely not an issue
 
-[]Add ability to rollover recurring transactions after month is over
-	- upon logging in/going to index page - check month of DA versus current month
-		>if they don't match,
-			-ditch the non-recurring transactions(or move to previous month table?)
-			-change the recurring transactions to move up a month
-			-if the day is invalid move it to the latest day on the month
-			-recalculate DA
-	
-[]Add a first time budget setup script
-
-[]Put a dashboard on index page with stats
-
-
 [X?]Beautify - REST API/BOOTSTRAP
 	-WIP
-
+[X]Add categories to transactions
+	- add prepopulated dropdown list of selectable categories (later - add ability to add categories?)
+	- food, housing, income, entertainment, education, shopping, personal care, health,kids, investments, utilities, taxes
+	- Stringfield on transaction model
 
 [X]Stylize recurring transactions different than nonrecurring on transaction page

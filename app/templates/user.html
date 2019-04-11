@@ -1,26 +1,6 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-	<table class="table" style="border-collapse: collapse;">
-		<tr valign="top">
-			<td width="128px"><img src="{{ user.avatar(128) }}"></td>
-			<td><h1>{{ user.username }}'s {{ title }}</h1></td>
-		</tr>
-		{% if title=="Profile" %}
-		<tr style="text-align:left;">
-			<th colspan="2" class = "success"><h2>Daily Amount:</h2></th>
-			<th colspan="2" class = "warning"><h2>Spent Today:</h2></th>
-			<th colspan="2" class = "danger"><h2>Cash Left: </h2></th>
-		</tr>
-		<tr style="text-align:left;">
-			{% if user.daily_allowance %}
-			<td colspan="2" class = "success"><h2>{{ '$'+'{:.2f}'.format(user.daily_allowance) }} </h2></td>
-			<td colspan="2" class = "warning"><h2>{{ '$'+'{:.2f}'.format(today) }} </h2></td>
-			<td colspan="2" class = "danger"><h2>{{ '$'+'{:.2f}'.format(user.daily_allowance*dim) }} </h2></td>
-			{% endif %}
-		</tr>
-	</table>
-		{% endif %}
 		{% if title=="Profile" %}
 		<ul class="nav nav-tabs">
 			<li role="presentation" class="active"><a href="{{ url_for('transactions') }}">Transactions</a></li>
@@ -43,12 +23,11 @@
 	
 	<table class = "table table-hover table-sm ">
 	<tr>
-		<th>User</th>
 		<th>Amount</th>
 		<th>Category</th>
 		<th>Date</th>
-		<th>EditBtn</th>
 		<th>Note</th>
+		<th>EditBtn</th>
 	</tr>
 <!--
 	{% if title=="Profile" %}
@@ -73,9 +52,8 @@
 		<td>${{ form.amount(size=10) }}</td>
 		<td>{{ form.category() }}</td>
 		<td>{{ form.dt(class_='datepicker') }}</td>
+		<td>Note:{{ form.note(size=20,id='notes') }}</td>
 		<td>{{ form.add(value="Add Transaction") }}</td>
-		<td>Note:</td>
-		<td>{{ form.note(size=13,id='notes') }}</td>
 	</tr>
 
 	

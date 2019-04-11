@@ -1,20 +1,23 @@
 {% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-	<h1>Hello, {{ current_user.username }}!</h1>
-	<h1>(This page is a work in progress, please click Profile)</h1>
-	<!--
-	{% if not transactions %}
-	<p><a href="{{ url_for('new_entry') }}">Begin New Budget</a></p>
-	{% endif %}
-	{% for transaction in transactions %}
-	<div>
-		<p>User: {{ transaction.payer.username }}</p>
-		<p>Amount: {{ transaction.amount }}</p>
-		<p>Note: {{ transaction.note }}</p>
-		<p>Monthly?: {{ transaction.recurring }}</p>
-		<hr>
-	</div>
-	{% endfor %}
--->
+	<table class="table" style="border-collapse: collapse;">
+		<tr valign="top">
+			<td width="128px"><img src="{{ user.avatar(128) }}"></td>
+			<td><h1>{{ user.username }}: Budgets</h1></td>
+		</tr>
+		<tr style="text-align:left;">
+			<th colspan="2" class = "success"><h2>Daily Amount:</h2></th>
+			<th colspan="2" class = "warning"><h2>Spent Today:</h2></th>
+			<th colspan="2" class = "danger"><h2>Cash Left: </h2></th>
+		</tr>
+		<tr style="text-align:left;">
+			{% if user.daily_allowance %}
+			<td colspan="2" class = "success"><h2>{{ '$'+'{:.2f}'.format(dA) }} </h2></td>
+			<td colspan="2" class = "warning"><h2>{{ '$'+'{:.2f}'.format(today) }} </h2></td>
+			<td colspan="2" class = "danger"><h2>{{ '$'+'{:.2f}'.format(dA*dim) }} </h2></td>
+			{% endif %}
+		</tr>
+	</table>
 {% endblock %}

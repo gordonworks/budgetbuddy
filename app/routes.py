@@ -13,8 +13,25 @@ import pygal
 @app.route('/index')
 @login_required
 def index():
-	transactions = Transaction.query.filter_by(payer = current_user).all()
-	return render_template('index.html',title='Budget Buddy',transactions=transactions)
+	user = User.query.filter_by(username=current_user.username).first_or_404()
+	daysInMonth = monthrange(datetime.today().year,datetime.today().month)[1] - datetime.today().day
+
+	#recalculate daily amount if the day is stale
+	if user.dA_timestamp.day != datetime.today().day:
+		daily_amount = calc_DA(current_user)
+
+	#if there was no timestamp selected, then we will subtract from the daily allowance
+	user.daily_allowance = calc_DA(current_user)
+
+	total = 0.0
+	dayTrans = Transaction.query.filter_by(recurring=False)
+	for t in dayTrans:
+		if t.timestamp.date() == datetime.today().date():
+			total = total+t.amount
+	total = 0-total
+
+	return render_template('index.html',title='Budget Buddy',user=user,dim=daysInMonth,
+		today=total,dA=float(user.daily_allowance))
 
 @app.route('/login',methods=['GET','POST'])
 def login():
@@ -57,16 +74,10 @@ def register():
 def transactions():
 	user = User.query.filter_by(username=current_user.username).first_or_404()
 	form = AddTransactionForm()
-	daysInMonth = monthrange(datetime.today().year,datetime.today().month)[1] - datetime.today().day
-	#recalculate daily amount if the day is stale
-	if user.dA_timestamp.day != datetime.today().day:
-		daily_amount = calc_DA(current_user)
 	if form.validate_on_submit():
 		formatted_amount = f'{float(form.amount.data):.2f}'
 		t = Transaction(note=form.note.data,amount='-'+formatted_amount,
 			recurring=False,payer=current_user,category=form.category.data,timestamp=form.dt.data)
-		#if there was no timestamp selected, then we will subtract from the daily allowance
-		user.daily_allowance = calc_DA(current_user)
 
 		db.session.add(t)
 		db.session.commit()
@@ -82,18 +93,12 @@ def transactions():
 	prev_url = url_for('transactions',page=transactions.prev_num) \
 		if transactions.has_prev else None
 
-	total = 0.0
-	dayTrans = Transaction.query.filter_by(recurring=False)
-	for t in dayTrans:
-		if t.timestamp.date() == datetime.today().date():
-			total = total+t.amount
-	total = 0-total
 
 	#generating the light blue recurring transactions on the page
 	allTrans = Transaction.query.filter_by(payer = current_user,recurring=True).all()
 
 	return render_template('user.html',user=user,transactions=transactions.items,form=form,
-		title="Profile",allTrans=allTrans,next_url=next_url,prev_url=prev_url,dim=daysInMonth,today=total)
+		title="Profile",allTrans=allTrans,next_url=next_url,prev_url=prev_url)
 
 @app.route('/delete/<int:id>/',methods=['GET','POST'])
 @login_required
@@ -202,7 +207,7 @@ def results(category):
 	itotal=0.0
 	#Logic for all transaction/expenses
 	#1 All or 2 using the category
-	if category == 'all':
+	if category == 'all' or category =='income':
 		allTrans = Transaction.query.filter_by(payer=current_user
 			).filter(Transaction.amount<=0).order_by(Transaction.timestamp.desc()).all()
 	else:
