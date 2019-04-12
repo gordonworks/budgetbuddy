@@ -19,6 +19,7 @@ class User(UserMixin, db.Model):
 	#adds transaction.payer as a reference back to the user
 	#User u -> u.transactions will give the list of transactions
 	transactions = db.relationship('Transaction',backref='payer',lazy='dynamic')
+	budgets = db.relationship('Budget',backref='budgeter',lazy='dynamic')
 
 	def __repr__(self):
 		return '<User {}>'.format(self.username)
@@ -46,3 +47,14 @@ class Transaction(db.Model):
 
 	def __repr__(self):
 		return '<{}:{}>'.format(self.note,self.amount)
+
+class Budget(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	cur_amount = db.Column(db.String(16))
+	max_amount = db.Column(db.String(16))
+	category = db.Column(db.String(32),unique=True)
+	timestamp = db.Column(db.DateTime,index=True,default=datetime.utcnow)
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+	def __repr__(self):
+		return '<{}:{}>'.format(self.category,self.max_amount)

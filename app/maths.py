@@ -16,3 +16,13 @@ def calc_DA(user, daily=True):
 
 	total_DA = f'{total_DA:.2f}'
 	return total_DA
+
+def category_totals(user):
+	user = User.query.filter_by(username=user.username).first_or_404()
+	transactions = Transaction.query.filter_by(payer=user).filter(Transaction.amount<=0).all()
+	d = dict()
+	
+	for transaction in transactions:
+		d[transaction.category] = d.get(transaction.category,0.0)-transaction.amount
+
+	return d

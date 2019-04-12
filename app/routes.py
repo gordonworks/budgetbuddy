@@ -1,10 +1,10 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, AddTransactionForm
+from app.forms import LoginForm, RegistrationForm, AddTransactionForm, AddBudgetForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User,Transaction
+from app.models import User,Transaction,Budget
 from werkzeug.urls import url_parse
-from app.maths import calc_DA
+from app.maths import calc_DA, category_totals
 from datetime import date, datetime
 from calendar import monthrange
 import pygal
@@ -159,7 +159,7 @@ def income():
 		return redirect(url_for('income'))
 	return render_template('user.html',username=user.username,user=user,
 		transactions=transactions,form=form,title="Income",dim=daysInMonth)
-
+"""
 @app.route('/new_entry',methods=['GET','POST'])
 @login_required
 def new_entry():
@@ -199,6 +199,7 @@ def new_entry():
 		return redirect(url_for('new_entry'))
 
 	return render_template('new_entry.html',user=user,transactions=transactions,form=form)
+"""
 
 @app.route('/results/<category>')
 @login_required
@@ -287,3 +288,22 @@ def charts():
 
 	graph_data = graph.render_data_uri()
 	return render_template("charts.html", graph_data = graph_data)
+
+@app.route('/budgets',methods=['GET','POST'])
+@login_required
+def budgets():
+	buds = Budget.query.filter_by(budgeter=current_user).all()
+	bud_dict = category_totals(current_user)
+
+	for bud in buds:
+		bud.cur_amount = bud_dict[bud.category]
+
+	form = AddBudgetForm()
+
+	if form.validate_on_submit():
+		b = Budget(cur_amount = bud_dict[form.category.data],max_amount=form.max_amount.data,
+			category=form.category.data,budgeter=current_user)
+		db.session.add(b)
+		db.session.commit()
+		return redirect(url_for('budgets'))
+	return render_template('budgets.html',buds=buds,form=form,title="Budgets")
