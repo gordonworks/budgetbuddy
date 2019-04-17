@@ -292,13 +292,21 @@ def charts():
 @app.route('/budgets',methods=['GET','POST'])
 @login_required
 def budgets():
+	#Gets all budgets to display on screen
 	buds = Budget.query.filter_by(budgeter=current_user).all()
+	#Aggregates all totals per category for the current user
 	bud_dict = category_totals(current_user)
-
+	#Percentages dictionary because jinja cant do math
+	percentages = dict()
+	#Sets current amount (cur_amount) in the budget data
 	for bud in buds:
 		bud.cur_amount = bud_dict[bud.category]
+		percentages[bud.category] = 100*(bud.cur_amount/float(bud.max_amount))
+	
 
 	form = AddBudgetForm()
+
+	default = 'progress-bar bg-warning'
 
 	if form.validate_on_submit():
 		b = Budget(cur_amount = bud_dict[form.category.data],max_amount=form.max_amount.data,
@@ -306,4 +314,5 @@ def budgets():
 		db.session.add(b)
 		db.session.commit()
 		return redirect(url_for('budgets'))
-	return render_template('budgets.html',buds=buds,form=form,title="Budgets")
+	return render_template('budgets.html',buds=buds,form=form,title="Budgets",percentages=percentages,
+		default=default)

@@ -3,11 +3,12 @@
 
 {% block app_content %}
 	<h1>Budgets</h1>
+	<h4>(Todo: add delete button)</h4>
 	{% if buds %}
 		{% for bud in buds %}
-			<p>{{ bud }},{{ bud.cur_amount }}</p>
+			<p>{{ bud.category }}</p>
 			<div class="progress">
-  			<div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+  				<div class="progress-bar bg-success" role="progressbar" style="width:{{ percentages[bud.category] }}%" aria-valuenow="{{ percentages[bud.category] }}" aria-valuemin="0" aria-valuemax="100">{{ '$'+'{:.2f}'.format(bud.cur_amount) }} / {{ '$'+'{}'.format(bud.max_amount) }}</div>
 			</div>
 		{% endfor %}
 	{% endif %}
