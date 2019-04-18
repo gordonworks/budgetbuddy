@@ -4,7 +4,7 @@ from app.forms import LoginForm, RegistrationForm, AddTransactionForm, AddBudget
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User,Transaction,Budget
 from werkzeug.urls import url_parse
-from app.maths import calc_DA, category_totals
+from app.maths import calc_DA, category_totals, days_left
 from datetime import date, datetime
 from calendar import monthrange
 import pygal
@@ -14,8 +14,6 @@ import pygal
 @login_required
 def index():
 	user = User.query.filter_by(username=current_user.username).first_or_404()
-	daysInMonth = monthrange(datetime.today().year,datetime.today().month)[1] - datetime.today().day
-
 	#recalculate daily amount if the day is stale
 	if user.dA_timestamp.day != datetime.today().day:
 		daily_amount = calc_DA(current_user)
@@ -30,7 +28,7 @@ def index():
 			total = total+t.amount
 	total = 0-total
 
-	return render_template('index.html',title='Budget Buddy',user=user,dim=daysInMonth,
+	return render_template('index.html',title='Budget Buddy',user=user,dim=days_left(),
 		today=total,dA=float(user.daily_allowance))
 
 @app.route('/login',methods=['GET','POST'])
@@ -100,16 +98,21 @@ def transactions():
 	return render_template('user.html',user=user,transactions=transactions.items,form=form,
 		title="Profile",allTrans=allTrans,next_url=next_url,prev_url=prev_url)
 
-@app.route('/delete/<int:id>/',methods=['GET','POST'])
+@app.route('/delete/<type>/<int:id>/',methods=['GET','POST'])
 @login_required
-def delete(id):
-	t = Transaction.query.filter_by(id=id).first_or_404()
-	user = User.query.filter_by(username=current_user.username).first_or_404()
-	db.session.delete(t)
-	db.session.commit()
+def delete(type,id):
+	if type == 'transaction':
+		t = Transaction.query.filter_by(id=id).first_or_404()
+		user = User.query.filter_by(username=current_user.username).first_or_404()
+		db.session.delete(t)
+		db.session.commit()
 	
-	user.daily_allowance = calc_DA(current_user)
-	db.session.commit()
+		user.daily_allowance = calc_DA(current_user)
+		db.session.commit()
+	elif type == 'budget':
+		b = Budget.query.filter_by(id=id).first_or_404()
+		db.session.delete(b)
+		db.session.commit()
 	#ensures deleting a transaction preserves the current page
 	next_page = request.args.get('next')
 	if not next_page or url_parse(next_page).netloc != '':

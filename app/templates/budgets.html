@@ -3,18 +3,21 @@
 
 {% block app_content %}
 	<h1>Budgets</h1>
-	<h4>(Todo: add delete button)</h4>
-	{% if buds %}
-		{% for bud in buds %}
-			<p>{{ bud.category }}</p>
-			<div class="progress">
-  				<div class="progress-bar bg-success" role="progressbar" style="width:{{ percentages[bud.category] }}%" aria-valuenow="{{ percentages[bud.category] }}" aria-valuemin="0" aria-valuemax="100">{{ '$'+'{:.2f}'.format(bud.cur_amount) }} / {{ '$'+'{}'.format(bud.max_amount) }}</div>
+			{% if buds %}
+			{% for bud in buds %}
+				<div class="progress">
+  					<div class="progress-bar bg-success" role="progressbar" style="width:{{ percentages[bud.category] }}%" aria-valuenow="{{ percentages[bud.category] }}" aria-valuemin="0" aria-valuemax="100">{{ bud.category }}: {{ '$'+'{:.2f}'.format(bud.cur_amount) }} / {{ '$'+'{}'.format(bud.max_amount) }}
+  					</div>
+				</div>
+				<button class="btn btn-default btn-sm" onclick="window.location.href='{{ url_for("delete",type="budget",id=bud.id,next=request.full_path) }}';">
+				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				</button>
+			{% endfor %}
+			{% endif %}
+		<div class="row">
+			<div class="col-md-4">
+				{{ wtf.quick_form(form) }}
 			</div>
-		{% endfor %}
-	{% endif %}
-	<div class="row">
-		<div class="col-md-4">
-			{{ wtf.quick_form(form) }}
 		</div>
 	</div>
 {% endblock %}

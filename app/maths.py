@@ -8,7 +8,7 @@ def calc_DA(user, daily=True):
 	transactions = Transaction.query.filter_by(payer=current_user).all()
 	total_DA = 0.0
 	#Gets the remaining days left of the year
-	daysInMonth = monthrange(datetime.today().year,datetime.today().month)[1] - datetime.today().day
+	daysInMonth = days_left()
 	for t in transactions:
 		total_DA+=float(t.amount)
 	if daily:
@@ -26,3 +26,6 @@ def category_totals(user):
 		d[transaction.category] = d.get(transaction.category,0.0)-transaction.amount
 
 	return d
+
+def days_left():
+	return (monthrange(datetime.today().year,datetime.today().month)[1] - datetime.today().day)+1
