@@ -20,16 +20,8 @@ Bugs
 
 Add Features
 -------------------------------------------------
-[]Add ability to create budgets for categories to show progress on front page
-
-
-
-[]Add charts for fun data visuals
-	-pygal http://pygal.org/en/stable/documentation/index.html
-
-
 []Add ability to rollover recurring transactions after month is over
-	- Also repeating frequency selection
+	- Also repeating frequency selection - days/weeks/months/years
 	- upon logging in/going to index page - check month of DA versus current month
 		>if they don't match,
 			-ditch the non-recurring transactions(or move to previous month table?)
@@ -38,9 +30,18 @@ Add Features
 			-recalculate DA
 	
 []Add a first time budget setup script
+	- on index page
+	- if no transactions, will prompt to create new budget
+	- scripted one time set of pages
+
+[]Add ability to create new categories
+
+[]Add charts for fun data visuals
+	-pygal http://pygal.org/en/stable/documentation/index.html
 
 []Put a dashboard on index page with stats
 
+[X]Add ability to create budgets for categories to show progress on front page
 
 [X]Add separate page(results?) that shows 2 tables, one with recurring and one with nonrecurring transactions
 
