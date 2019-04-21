@@ -20,6 +20,9 @@ Bugs
 
 Add Features
 -------------------------------------------------
+[]On home page, show a calendar of spending by date
+	-broken down by categories?
+	
 []Add ability to rollover recurring transactions after month is over
 	- Also repeating frequency selection - days/weeks/months/years
 	- upon logging in/going to index page - check month of DA versus current month

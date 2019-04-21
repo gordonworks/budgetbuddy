@@ -29,3 +29,27 @@ def category_totals(user):
 
 def days_left():
 	return (monthrange(datetime.today().year,datetime.today().month)[1] - datetime.today().day)+1
+
+def gen_calendar():
+	now = datetime.today()
+	prevmonth=now.replace(month=(now.month-1),day=1)
+	nextmonth=now.replace(month=(now.month+1),day=1)
+
+	nowdr=(1,monthrange(now.year,now.month)[1])
+	prevdr = (1,monthrange(prevmonth.year,prevmonth.month)[1])
+	nextdr = (1,monthrange(nextmonth.year,nextmonth.month)[1])
+
+	month_days=[]
+	days_of_last_month = datetime.today().replace(day=1).isoweekday()
+	if days_of_last_month == 7:
+		days_of_last_month = 0
+
+	#todo
+	"""
+	- enumerate over days in reverse dolm times
+	- enumerate over days in current month
+	- enumerate over days (42-30)-dolm for next month
+	"""
+	for d in range(nowdr[0],nowdr[1]):
+		month_days.append((d,now.replace(day=d).strftime("%A")))
+	return month_days
