@@ -47,16 +47,21 @@
 		</div>
 		<div class="col-xs-3">
 			<table class ="table table-sm">
-				<thead>
-					<th scope="col">Category</th>
-				</thead>
 				<tbody>
-				<tr><td><a href="{{ url_for('results',category='all') }}">All</a></td>
-			{% for item in loc %}
 				<tr>
-					<td><a href="{{ url_for('results',category=item[0]) }}">{{ item[1] }}</td>
+					<td>
+						<div class="dropdown show">
+							  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>
+
+							  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+								<a class="dropdown-item" href="{{ url_for('results',category='all') }}">All</a><br>
+								{% for item in loc %}
+								<a class="dropdown-item" href="{{ url_for('results',category=item[0]) }}">{{ item[1] }}</a><br>
+								{% endfor %}
+							  </div>
+						</div>
+					</td>
 				</tr>
-			{% endfor %}
 				</tbody>
 			</table>
 		</div>

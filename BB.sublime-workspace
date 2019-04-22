@@ -4,6 +4,54 @@
 		"selected_items":
 		[
 			[
+				"days",
+				"days_left"
+			],
+			[
+				"progr",
+				"progress_types"
+			],
+			[
+				"cur",
+				"cur_amount"
+			],
+			[
+				"per",
+				"percentages"
+			],
+			[
+				"cat",
+				"category"
+			],
+			[
+				"bud",
+				"bud_dict"
+			],
+			[
+				"cu",
+				"cur_amount"
+			],
+			[
+				"bu",
+				"budgets"
+			],
+			[
+				"Ad",
+				"AddBudgetForm"
+			],
+			[
+				"curre",
+				"current_user"
+			],
+			[
+				"tra",
+				"transaction"
+			],
+			[
+				"tran",
+				"transactions"
+			],
+			[
 				"filter",
 				"filter_by"
 			],
@@ -86,10 +134,6 @@
 			[
 				"html",
 				"html_body"
-			],
-			[
-				"cur",
-				"current_user"
 			],
 			[
 				"ne",
@@ -208,10 +252,6 @@
 				"recalcDAsFromExpenses"
 			],
 			[
-				"days",
-				"daysthismonth"
-			],
-			[
 				"ex",
 				"excess"
 			],
@@ -305,11 +345,10 @@
 			}
 		},
 		{
-			"file": "app/models.py",
+			"file": "/C/Users/grainwat/Desktop/pyf/Projects/krislist/app/templates/register.html",
 			"settings":
 			{
-				"buffer_size": 1634,
-				"encoding": "UTF-8",
+				"buffer_size": 216,
 				"line_ending": "Windows"
 			}
 		},
@@ -317,16 +356,16 @@
 			"file": "app/templates/edit.html",
 			"settings":
 			{
-				"buffer_size": 396,
+				"buffer_size": 592,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/routes.py",
+			"file": "app/templates/charts.html",
 			"settings":
 			{
-				"buffer_size": 9669,
+				"buffer_size": 234,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -335,16 +374,16 @@
 			"file": "app/templates/results.html",
 			"settings":
 			{
-				"buffer_size": 335,
+				"buffer_size": 1712,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "budgetbuddy.py",
+			"file": "app/models.py",
 			"settings":
 			{
-				"buffer_size": 175,
+				"buffer_size": 2149,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -353,7 +392,25 @@
 			"file": "app/forms.py",
 			"settings":
 			{
-				"buffer_size": 1728,
+				"buffer_size": 2792,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/routes.py",
+			"settings":
+			{
+				"buffer_size": 12016,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/templates/budgets.html",
+			"settings":
+			{
+				"buffer_size": 886,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -368,10 +425,11 @@
 			}
 		},
 		{
-			"file": "/C/Users/grainwat/Desktop/pyf/Projects/krislist/app/templates/register.html",
+			"file": "app/templates/index.html",
 			"settings":
 			{
-				"buffer_size": 216,
+				"buffer_size": 889,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
@@ -379,7 +437,7 @@
 			"file": "app/templates/user.html",
 			"settings":
 			{
-				"buffer_size": 2904,
+				"buffer_size": 2228,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -388,7 +446,7 @@
 			"file": "app/templates/base.html",
 			"settings":
 			{
-				"buffer_size": 1635,
+				"buffer_size": 1713,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -397,16 +455,7 @@
 			"file": "app/maths.py",
 			"settings":
 			{
-				"buffer_size": 618,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/templates/index.html",
-			"settings":
-			{
-				"buffer_size": 468,
+				"buffer_size": 986,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -424,7 +473,7 @@
 			"file": "app/templates/_transaction.html",
 			"settings":
 			{
-				"buffer_size": 679,
+				"buffer_size": 712,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -434,6 +483,15 @@
 			"settings":
 			{
 				"buffer_size": 324,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "budgetbuddy.py",
+			"settings":
+			{
+				"buffer_size": 175,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -471,6 +529,7 @@
 	},
 	"file_history":
 	[
+		"/C/Users/grainwat/Desktop/pyf/Projects/Budgetbuddy/app/static/rice.js",
 		"/C/Users/grainwat/Desktop/pyf/Projects/gordonblog/gordonblog/gordonblog/settings.py",
 		"/C/Users/grainwat/Desktop/pyf/Projects/Budgetbuddy/app/templates/expenses.html",
 		"/C/Users/grainwat/Desktop/pyf/Projects/Budgetbuddy/app/templates/new_entry.html",
@@ -516,7 +575,7 @@
 	],
 	"find":
 	{
-		"height": 32.0
+		"height": 31.0
 	},
 	"find_in_files":
 	{
@@ -530,6 +589,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			".get",
+			"'/",
 			"url_for"
 		],
 		"highlight": true,
@@ -548,7 +609,7 @@
 	"groups":
 	[
 		{
-			"selected": 9,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -576,212 +637,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 12,
+					"stack_index": 16,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "app/models.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1634,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1634,
-								1634
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 138.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 14,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/templates/edit.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 396,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								396,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/routes.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9669,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9006,
-								9006
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2826.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "app/templates/results.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 335,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								40,
-								40
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "budgetbuddy.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 175,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								175,
-								175
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 13,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "app/forms.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1728,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1447,
-								1447
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "app/templates/login.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 711,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								711,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
 					"file": "/C/Users/grainwat/Desktop/pyf/Projects/krislist/app/templates/register.html",
 					"semi_transient": false,
 					"settings":
@@ -793,7 +653,7 @@
 						"selection":
 						[
 							[
-								0,
+								216,
 								0
 							]
 						],
@@ -806,53 +666,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 12,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
-					"file": "app/templates/user.html",
+					"buffer": 2,
+					"file": "app/templates/edit.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2904,
+						"buffer_size": 592,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2211,
-								2211
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "app/templates/base.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1635,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1088,
-								1088
+								91,
+								91
 							]
 						],
 						"settings":
@@ -868,49 +699,49 @@
 					"type": "text"
 				},
 				{
-					"buffer": 11,
-					"file": "app/maths.py",
+					"buffer": 3,
+					"file": "app/templates/charts.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 618,
+						"buffer_size": 234,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								618,
-								618
+								66,
+								26
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 13,
 					"type": "text"
 				},
 				{
-					"buffer": 12,
-					"file": "app/templates/index.html",
+					"buffer": 4,
+					"file": "app/templates/results.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 468,
+						"buffer_size": 1712,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								40,
-								40
+								191,
+								124
 							]
 						],
 						"settings":
@@ -926,7 +757,267 @@
 					"type": "text"
 				},
 				{
+					"buffer": 5,
+					"file": "app/models.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2149,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2011,
+								2011
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 429.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/forms.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2792,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								591,
+								591
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/routes.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12016,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3972,
+								3972
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1914.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "app/templates/budgets.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 886,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								767,
+								767
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "app/templates/login.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 711,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								136,
+								136
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "app/templates/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 889,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								255,
+								255
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "app/templates/user.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2228,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								722,
+								722
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 330.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "app/templates/base.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1713,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								798,
+								798
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
 					"buffer": 13,
+					"file": "app/maths.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 986,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								402,
+								402
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
 					"file": "app/errors.py",
 					"semi_transient": false,
 					"settings":
@@ -950,24 +1041,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 15,
+					"stack_index": 17,
 					"type": "text"
 				},
 				{
-					"buffer": 14,
+					"buffer": 15,
 					"file": "app/templates/_transaction.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 679,
+						"buffer_size": 712,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8,
-								8
+								703,
+								463
 							]
 						],
 						"settings":
@@ -979,11 +1070,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 15,
+					"buffer": 16,
 					"file": "config.py",
 					"semi_transient": false,
 					"settings":
@@ -1007,7 +1098,35 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "budgetbuddy.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 175,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								175,
+								175
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 15,
 					"type": "text"
 				}
 			]
@@ -1015,7 +1134,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 32.0
+		"height": 31.0
 	},
 	"input":
 	{
@@ -1052,7 +1171,7 @@
 	"project": "BB.sublime-project",
 	"replace":
 	{
-		"height": 60.0
+		"height": 58.0
 	},
 	"save_all_on_build": true,
 	"select_file":

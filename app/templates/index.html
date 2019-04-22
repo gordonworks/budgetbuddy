@@ -20,4 +20,34 @@
 			{% endif %}
 		</tr>
 	</table>
+	<table class = "table">
+		<thead>
+			<th>Sunday</th>
+			<th>Monday</th>
+			<th>Tuesday</th>
+			<th>Wednesday</th>
+			<th>Thursday</th>
+			<th>Friday</th>
+			<th>Saturday</th>
+		</thead>
+		<tbody>
+			{% for week in range(6) %}
+				<tr>
+					{% for day in range(7) %}
+						<td>
+							{% if days[(week*7)+day][0].month == days[15][0].month %}
+								{{ days[(week*7)+day][0] }}<br>
+								<b>{{ '$'+'{:.2f}'.format(days[(week*7)+day][1]) }}</b>
+							{% else %}
+							<div style="color:grey;">
+								{{ days[(week*7)+day][0] }}<br>
+								{{ '$'+'{:.2f}'.format(days[(week*7)+day][1]) }}
+							</div>
+							{% endif %}
+						</td>
+					{% endfor %}
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 {% endblock %}

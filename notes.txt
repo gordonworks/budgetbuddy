@@ -21,7 +21,11 @@ Bugs
 Add Features
 -------------------------------------------------
 []On home page, show a calendar of spending by date
-	-broken down by categories?
+	-[] add ability to sort by type of transaction/category
+
+[]Add ability to sort by date on results page
+	-[] change categories into a dropdown selection
+	-[] add a date picker to see a certain day of spending
 	
 []Add ability to rollover recurring transactions after month is over
 	- Also repeating frequency selection - days/weeks/months/years

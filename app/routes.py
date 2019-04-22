@@ -4,7 +4,7 @@ from app.forms import LoginForm, RegistrationForm, AddTransactionForm, AddBudget
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User,Transaction,Budget
 from werkzeug.urls import url_parse
-from app.maths import calc_DA, category_totals, days_left
+from app.maths import calc_DA, category_totals, days_left, gen_calendar
 from datetime import date, datetime
 from calendar import monthrange
 import pygal
@@ -28,8 +28,22 @@ def index():
 			total = total+t.amount
 	total = 0-total
 
+	"""
+	Gathers all spending by day into a tuple (date,amount)
+	"""
+	spent_on_day=[]
+	temp=0.0
+	#trans = Transaction.query.filter_by(payer=current_user).filter(Transaction.amount<=0).filter_by(recurring=True).all()
+	trans = Transaction.query.filter_by(payer=current_user).filter(Transaction.amount<=0).all()
+	for day in gen_calendar():
+		for t in trans:
+			if day == t.timestamp.date():
+				temp = temp - t.amount
+		spent_on_day.append((day,temp))
+		temp=0.0
+
 	return render_template('index.html',title='Budget Buddy',user=user,dim=days_left(),
-		today=total,dA=float(user.daily_allowance))
+		today=total,dA=float(user.daily_allowance),days=spent_on_day)
 
 @app.route('/login',methods=['GET','POST'])
 def login():
