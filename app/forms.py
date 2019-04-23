@@ -42,15 +42,18 @@ class AddTransactionForm(FlaskForm):
 		('health','Health'),('personal','Personal Care'),('interest','Credit Cards/Loans'),
 		('transportation','Transportation')]
 	category = SelectField('Category',choices=listochoices)
-	dt = DateField('DatePicker', format='%Y-%m-%d', validators = [Optional()])
+	dt = DateField('Date', format='%Y-%m-%d', validators = [Optional()])
 
 class AddBudgetForm(FlaskForm):
 	max_amount = StringField('Budget Amount', validators = [
 		DataRequired(), Regexp('\d+(\.\d\d)?', message='Must be in monetary format')])
-	listochoices = [('groceries','Groceries'),('restaurant','Restaurant'),
-		('entertainment','Entertainment'),('education','Education'),('shopping','Shopping'),
-		('rent','Rent/Mortgage'),('taxes','Taxes'),('investments','Investments'),
-		('health','Health'),('personal','Personal Care'),('interest','Credit Cards/Loans'),
-		('transportation','Transportation')]
+	listochoices = AddTransactionForm.listochoices
 	category = SelectField('Category',choices=listochoices)
 	add = SubmitField('Add')
+
+class FilterForm(FlaskForm):
+	listochoices = AddTransactionForm.listochoices
+	category = SelectField('Category',choices=listochoices)
+	dtstart = DateField('Start Date', format='%Y-%m-%d', validators = [Optional()])
+	dtend = DateField('End Date', format='%Y-%m-%d', validators = [Optional()])
+	add = SubmitField('Filter')

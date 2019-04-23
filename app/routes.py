@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, AddTransactionForm, AddBudgetForm
+from app.forms import LoginForm, RegistrationForm, AddTransactionForm, AddBudgetForm, FilterForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User,Transaction,Budget
 from werkzeug.urls import url_parse
@@ -242,9 +242,10 @@ def results(category):
 		itotal+=item.amount
 
 	#slicing out income from the available categories
-	loc = AddTransactionForm.listochoices[:2]+AddTransactionForm.listochoices[3:]
+	form = FilterForm()
+	loc = form.listochoices[:2]+form.listochoices[3:]
 	
-	return render_template('results.html',allTrans=allTrans,total=total,loc=loc,iTrans=iTrans,itotal=itotal)
+	return render_template('results.html',allTrans=allTrans,total=total,loc=loc,iTrans=iTrans,itotal=itotal,form=form)
 
 @app.route('/edit/<int:id>/',methods=['GET','POST'])
 @login_required
