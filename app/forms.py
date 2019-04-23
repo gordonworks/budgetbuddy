@@ -53,6 +53,7 @@ class AddBudgetForm(FlaskForm):
 
 class FilterForm(FlaskForm):
 	listochoices = AddTransactionForm.listochoices
+	listochoices.insert(0,('all','All'))
 	category = SelectField('Category',choices=listochoices)
 	dtstart = DateField('Start Date', format='%Y-%m-%d', validators = [Optional()])
 	dtend = DateField('End Date', format='%Y-%m-%d', validators = [Optional()])

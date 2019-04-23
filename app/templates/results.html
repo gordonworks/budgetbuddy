@@ -37,7 +37,7 @@
 				<tr>
 					<td>{{ transaction.note }}</td>
 					<td>{{ '$'+'{:.2f}'.format(transaction.amount) }}</td>
-					<td><a href="{{ url_for('results',category=transaction.category) }}">{{ transaction.category }}</a></td>
+					<td><a href="{{ url_for('results',category=transaction.category,daterange='all') }}">{{ transaction.category }}</a></td>
 					<td>{{ transaction.timestamp }}</td>
 				</tr>
 			{% endfor %}
@@ -48,25 +48,21 @@
 		<div class="col-xs-3">
 			<table class ="table table-sm">
 				<tbody>
+					<form action="" method="post">
 				<tr>
 					<td>
-						<div class="dropdown show">
-							  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>
-
-							  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-								<a class="dropdown-item" href="{{ url_for('results',category='all') }}">All</a><br>
-								{% for item in loc %}
-								<a class="dropdown-item" href="{{ url_for('results',category=item[0]) }}">{{ item[1] }}</a><br>
-								{% endfor %}
-							  </div>
-						</div>
+						{{ form.hidden_tag() }}
+						{{ wtf.form_field(form.category,value=loc) }}
 					</td>
 				</tr>
 				<tr>
-					<td>
-					{{ wtf.form_field(form.dtstart,class_='datepicker') }}
-					</td>
+					<td>{{ wtf.form_field(form.dtstart,class_='datepicker') }}</td>
+					<td>{{ wtf.form_field(form.dtend,class_='datepicker') }}</td>
 				</tr>
+				<tr>
+					<td>{{ wtf.form_field(form.add) }}</td>
+				</tr>
+					</form>
 				</tbody>
 			</table>
 		</div>

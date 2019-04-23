@@ -218,9 +218,9 @@ def new_entry():
 	return render_template('new_entry.html',user=user,transactions=transactions,form=form)
 """
 
-@app.route('/results/<category>')
+@app.route('/results/<category>/<daterange>')
 @login_required
-def results(category):
+def results(category,daterange):
 	total=0.0
 	itotal=0.0
 	#Logic for all transaction/expenses
@@ -231,6 +231,9 @@ def results(category):
 	else:
 		allTrans = Transaction.query.filter_by(payer=current_user
 			).filter(Transaction.category == category).filter(Transaction.amount<=0).order_by(Transaction.timestamp.desc()).all()
+
+	if daterange != 'all':
+		print(daterange)
 	#Gathering up for total at top of table
 	for item in allTrans:
 		total-=item.amount
@@ -241,11 +244,12 @@ def results(category):
 	for item in iTrans:
 		itotal+=item.amount
 
-	#slicing out income from the available categories
+	#Setting defaults on the forms to coincide with whats being looked at
 	form = FilterForm()
-	loc = form.listochoices[:2]+form.listochoices[3:]
+	form.category.default = category
+	form.process()
 	
-	return render_template('results.html',allTrans=allTrans,total=total,loc=loc,iTrans=iTrans,itotal=itotal,form=form)
+	return render_template('results.html',allTrans=allTrans,total=total,loc=category,iTrans=iTrans,itotal=itotal,form=form)
 
 @app.route('/edit/<int:id>/',methods=['GET','POST'])
 @login_required
