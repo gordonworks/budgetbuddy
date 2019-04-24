@@ -240,7 +240,6 @@ def results(category,daterange):
 
 	#Filtering further by the date range
 	if daterange != 'all':
-		print(daterange)
 		startdate = datetime(year=int(daterange[:4]),month=int(daterange[4:6]),day=int(daterange[6:8]),hour=0,minute=0,second=0,microsecond=0)
 		enddate = datetime(year=int(daterange[8:12]),month=int(daterange[12:14]),day=int(daterange[14:]),hour=23,minute=59,second=59,microsecond=999999)
 		allTrans = allTrans.filter(Transaction.timestamp <= enddate).filter(Transaction.timestamp >= startdate)
@@ -257,9 +256,16 @@ def results(category,daterange):
 
 	form = FilterForm()
 
-	#Filtering
+	#Filter work, if theres no date selected defaults to max/min
 	if form.validate_on_submit():
-		dr = str(form.dtstart.data) + str(form.dtend.data)
+		start = str(form.dtstart.data)
+		end = str(form.dtend.data)
+		if start == 'None':
+			start = str(date.today().replace(day=1))
+		if end == 'None':
+			end = str(date.today().replace(day=days_in_month()))
+
+		dr = start + end
 		return redirect(url_for('results',category=form.category.data,daterange=dr))
 
 	#Setting defaults on the forms to coincide with whats being looked at
