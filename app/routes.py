@@ -4,7 +4,7 @@ from app.forms import LoginForm, RegistrationForm, AddTransactionForm, AddBudget
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User,Transaction,Budget
 from werkzeug.urls import url_parse
-from app.maths import calc_DA, category_totals, days_left, gen_calendar
+from app.maths import calc_DA, category_totals, days_left, gen_calendar, days_in_month
 from datetime import date, datetime
 from calendar import monthrange
 import pygal
@@ -218,22 +218,33 @@ def new_entry():
 	return render_template('new_entry.html',user=user,transactions=transactions,form=form)
 """
 
-@app.route('/results/<category>/<daterange>')
+@app.route('/results/<category>/<daterange>',methods=['GET','POST'])
 @login_required
 def results(category,daterange):
 	total=0.0
 	itotal=0.0
+
+	#parsing daterange from generated slug '2019-04-20' -> 2019042020190420
+	daterange = daterange.replace('-','')
+	if len(daterange) == 8:
+		daterange = daterange+daterange
+
 	#Logic for all transaction/expenses
 	#1 All or 2 using the category
 	if category == 'all' or category =='income':
 		allTrans = Transaction.query.filter_by(payer=current_user
-			).filter(Transaction.amount<=0).order_by(Transaction.timestamp.desc()).all()
+			).filter(Transaction.amount<=0)
 	else:
 		allTrans = Transaction.query.filter_by(payer=current_user
-			).filter(Transaction.category == category).filter(Transaction.amount<=0).order_by(Transaction.timestamp.desc()).all()
+			).filter(Transaction.category == category).filter(Transaction.amount<=0)
 
+	#Filtering further by the date range
 	if daterange != 'all':
 		print(daterange)
+		startdate = datetime(year=int(daterange[:4]),month=int(daterange[4:6]),day=int(daterange[6:8]),hour=0,minute=0,second=0,microsecond=0)
+		enddate = datetime(year=int(daterange[8:12]),month=int(daterange[12:14]),day=int(daterange[14:]),hour=23,minute=59,second=59,microsecond=999999)
+		allTrans = allTrans.filter(Transaction.timestamp <= enddate).filter(Transaction.timestamp >= startdate)
+
 	#Gathering up for total at top of table
 	for item in allTrans:
 		total-=item.amount
@@ -244,11 +255,24 @@ def results(category,daterange):
 	for item in iTrans:
 		itotal+=item.amount
 
-	#Setting defaults on the forms to coincide with whats being looked at
 	form = FilterForm()
+
+	#Filtering
+	if form.validate_on_submit():
+		dr = str(form.dtstart.data) + str(form.dtend.data)
+		return redirect(url_for('results',category=form.category.data,daterange=dr))
+
+	#Setting defaults on the forms to coincide with whats being looked at
 	form.category.default = category
+	if daterange == 'all':
+		form.dtstart.default = date.today().replace(day=1)
+		form.dtend.default = date.today().replace(day=days_in_month())
+	else:
+		form.dtstart.default = startdate.date()
+		form.dtend.default = enddate.date()
 	form.process()
 	
+	allTrans = allTrans.order_by(Transaction.timestamp.desc()).all()
 	return render_template('results.html',allTrans=allTrans,total=total,loc=category,iTrans=iTrans,itotal=itotal,form=form)
 
 @app.route('/edit/<int:id>/',methods=['GET','POST'])

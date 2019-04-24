@@ -17,6 +17,9 @@ def calc_DA(user, daily=True):
 	total_DA = f'{total_DA:.2f}'
 	return total_DA
 
+def days_in_month():
+	return monthrange(datetime.today().year,datetime.today().month)[1]
+
 def category_totals(user):
 	user = User.query.filter_by(username=user.username).first_or_404()
 	transactions = Transaction.query.filter_by(payer=user).filter(Transaction.amount<=0).all()

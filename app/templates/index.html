@@ -36,7 +36,7 @@
 					{% for day in range(7) %}
 						<td>
 							{% if days[(week*7)+day][0].month == days[15][0].month %}
-								{{ days[(week*7)+day][0] }}<br>
+								<a href="{{ url_for('results',category='all',daterange=days[(week*7)+day][0]) }}">{{ days[(week*7)+day][0] }}</a><br>
 								<b>{{ '$'+'{:.2f}'.format(days[(week*7)+day][1]) }}</b>
 							{% else %}
 							<div style="color:grey;">
