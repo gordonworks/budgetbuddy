@@ -35,7 +35,7 @@
 				<tbody>
 			{% for transaction in allTrans %}
 				<tr>
-					<td>{{ transaction.note }}</td>
+					<td><a href="{{ url_for("edit",id=transaction.id,next=request.full_path) }}">{{ transaction.note }}</a></td>
 					<td>{{ '$'+'{:.2f}'.format(transaction.amount) }}</td>
 					<td><a href="{{ url_for('results',category=transaction.category,daterange='all') }}">{{ transaction.category }}</a></td>
 					<td>{{ transaction.timestamp }}</td>

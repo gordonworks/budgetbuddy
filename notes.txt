@@ -35,6 +35,8 @@ Add Features
 	- if no transactions, will prompt to create new budget
 	- scripted one time set of pages
 
+[]Add spending by past 7 days, past 30 days on index
+
 []Add ability to sort by headers in Results
 
 []Add ability to create new categories
