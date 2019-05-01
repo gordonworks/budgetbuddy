@@ -52,7 +52,7 @@ class AddBudgetForm(FlaskForm):
 	add = SubmitField('Add')
 
 class FilterForm(FlaskForm):
-	listochoices = AddTransactionForm.listochoices
+	listochoices = AddTransactionForm.listochoices[:]
 	listochoices.insert(0,('all','All'))
 	category = SelectField('Category',choices=listochoices)
 	dtstart = DateField('Start Date', format='%Y-%m-%d', validators = [Optional()])

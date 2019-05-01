@@ -4,8 +4,52 @@
 		"selected_items":
 		[
 			[
+				"filter",
+				"filter"
+			],
+			[
+				"date",
+				"daterange"
+			],
+			[
 				"days",
-				"days_left"
+				"days_in_month"
+			],
+			[
+				"cate",
+				"category"
+			],
+			[
+				"Date",
+				"DateField"
+			],
+			[
+				"Ad",
+				"AddTransactionForm"
+			],
+			[
+				"Add",
+				"AddTransactionForm"
+			],
+			[
+				"spen",
+				"spent_on_day"
+			],
+			[
+				"gen",
+				"gen_calendar"
+			],
+			[
+				"month",
+				"month_days"
+			],
+			[
+				"day",
+				"days_of_last_month"
+			],
+			[
+				"prev",
+				"prevmonth"
 			],
 			[
 				"progr",
@@ -36,10 +80,6 @@
 				"budgets"
 			],
 			[
-				"Ad",
-				"AddBudgetForm"
-			],
-			[
 				"curre",
 				"current_user"
 			],
@@ -52,24 +92,12 @@
 				"transactions"
 			],
 			[
-				"filter",
-				"filter_by"
-			],
-			[
-				"day",
-				"daysInMonth"
-			],
-			[
 				"form",
 				"formatted_amount"
 			],
 			[
 				"backg",
 				"background-color\tproperty"
-			],
-			[
-				"date",
-				"datetime"
 			],
 			[
 				"back",
@@ -138,10 +166,6 @@
 			[
 				"ne",
 				"next_url"
-			],
-			[
-				"prev",
-				"prev_url"
 			],
 			[
 				"next",
@@ -288,10 +312,6 @@
 				"todayAllowance"
 			],
 			[
-				"month",
-				"monthExpense"
-			],
-			[
 				"total",
 				"totalUnspent"
 			],
@@ -339,7 +359,7 @@
 			"file": "app/__init__.py",
 			"settings":
 			{
-				"buffer_size": 419,
+				"buffer_size": 448,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -374,7 +394,7 @@
 			"file": "app/templates/results.html",
 			"settings":
 			{
-				"buffer_size": 1712,
+				"buffer_size": 1843,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -392,7 +412,7 @@
 			"file": "app/forms.py",
 			"settings":
 			{
-				"buffer_size": 2792,
+				"buffer_size": 2834,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -401,7 +421,7 @@
 			"file": "app/routes.py",
 			"settings":
 			{
-				"buffer_size": 12016,
+				"buffer_size": 13835,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -416,19 +436,19 @@
 			}
 		},
 		{
-			"file": "app/templates/login.html",
+			"file": "app/templates/index.html",
 			"settings":
 			{
-				"buffer_size": 711,
+				"buffer_size": 1680,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/templates/index.html",
+			"file": "app/templates/login.html",
 			"settings":
 			{
-				"buffer_size": 889,
+				"buffer_size": 711,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -446,7 +466,7 @@
 			"file": "app/templates/base.html",
 			"settings":
 			{
-				"buffer_size": 1713,
+				"buffer_size": 1729,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -455,7 +475,7 @@
 			"file": "app/maths.py",
 			"settings":
 			{
-				"buffer_size": 986,
+				"buffer_size": 2087,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -473,7 +493,7 @@
 			"file": "app/templates/_transaction.html",
 			"settings":
 			{
-				"buffer_size": 712,
+				"buffer_size": 728,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -529,6 +549,9 @@
 	},
 	"file_history":
 	[
+		"/C/Users/grainwat/Desktop/pyf/plot.py",
+		"/C/Users/grainwat/Desktop/pyf/markov.py",
+		"/C/Users/grainwat/Desktop/pyf/Projects/Budgetbuddy/app/util/assets.py",
 		"/C/Users/grainwat/Desktop/pyf/Projects/Budgetbuddy/app/static/rice.js",
 		"/C/Users/grainwat/Desktop/pyf/Projects/gordonblog/gordonblog/gordonblog/settings.py",
 		"/C/Users/grainwat/Desktop/pyf/Projects/Budgetbuddy/app/templates/expenses.html",
@@ -575,7 +598,7 @@
 	],
 	"find":
 	{
-		"height": 31.0
+		"height": 43.0
 	},
 	"find_in_files":
 	{
@@ -589,6 +612,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"replace",
 			".get",
 			"'/",
 			"url_for"
@@ -609,7 +633,7 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 7,
 			"sheets":
 			[
 				{
@@ -618,15 +642,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 419,
+						"buffer_size": 448,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								379,
-								379
+								23,
+								23
 							]
 						],
 						"settings":
@@ -637,7 +661,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 16,
+					"stack_index": 14,
 					"type": "text"
 				},
 				{
@@ -666,7 +690,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 12,
+					"stack_index": 15,
 					"type": "text"
 				},
 				{
@@ -682,8 +706,8 @@
 						"selection":
 						[
 							[
-								91,
-								91
+								123,
+								93
 							]
 						],
 						"settings":
@@ -695,7 +719,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
@@ -724,7 +748,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 13,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
@@ -733,15 +757,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1712,
+						"buffer_size": 1843,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								191,
-								124
+								1517,
+								1512
 							]
 						],
 						"settings":
@@ -750,10 +774,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 792.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -779,10 +803,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 429.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
@@ -791,15 +815,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2792,
+						"buffer_size": 2834,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								591,
-								591
+								2576,
+								2576
 							]
 						],
 						"settings":
@@ -808,10 +832,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 660.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
@@ -820,15 +844,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12016,
+						"buffer_size": 13835,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3972,
-								3972
+								10189,
+								10189
 							]
 						],
 						"settings":
@@ -837,10 +861,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1914.0,
+						"translation.y": 298.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -873,6 +897,35 @@
 				},
 				{
 					"buffer": 9,
+					"file": "app/templates/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1680,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1301,
+								1301
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 264.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
 					"file": "app/templates/login.html",
 					"semi_transient": false,
 					"settings":
@@ -897,36 +950,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "app/templates/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 889,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								255,
-								255
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -952,10 +976,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 330.0,
+						"translation.y": 924.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -964,15 +988,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1713,
+						"buffer_size": 1729,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								798,
-								798
+								1124,
+								1124
 							]
 						],
 						"settings":
@@ -981,10 +1005,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 264.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 13,
 					"type": "text"
 				},
 				{
@@ -993,15 +1017,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 986,
+						"buffer_size": 2087,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								402,
-								402
+								642,
+								642
 							]
 						],
 						"settings":
@@ -1050,15 +1074,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 712,
+						"buffer_size": 728,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								703,
-								463
+								135,
+								135
 							]
 						],
 						"settings":
@@ -1070,7 +1094,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 12,
 					"type": "text"
 				},
 				{
@@ -1098,7 +1122,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 14,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1126,7 +1150,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 15,
+					"stack_index": 16,
 					"type": "text"
 				}
 			]

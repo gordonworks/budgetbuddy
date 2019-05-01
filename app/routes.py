@@ -2,12 +2,21 @@ from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, AddTransactionForm, AddBudgetForm, FilterForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User,Transaction,Budget
+from app.models import User,Transaction,Budget, Arc_Transaction
 from werkzeug.urls import url_parse
 from app.maths import calc_DA, category_totals, days_left, gen_calendar, days_in_month
 from datetime import date, datetime
 from calendar import monthrange
+from functools import wraps
 import pygal
+
+def checknewmonth(f):
+	@wraps(f)
+	def decorated_function(*args,**kwargs):
+		if current_user.dA_timestamp.month != date.today().month:
+			return redirect(url_for('newmonth'))
+		return f(*arg,**kwargs)
+	return decorated_function
 
 @app.route('/')
 @app.route('/index')
@@ -220,6 +229,7 @@ def new_entry():
 
 @app.route('/results/<category>/<daterange>',methods=['GET','POST'])
 @login_required
+@checknewmonth
 def results(category,daterange):
 	total=0.0
 	itotal=0.0
@@ -368,3 +378,27 @@ def budgets():
 		return redirect(url_for('budgets'))
 	return render_template('budgets.html',buds=buds,form=form,title="Budgets",percentages=percentages,
 		default=default)
+
+
+@app.route('/newmonth')
+@login_required
+def newmonth():
+	"""
+	- Moves all transaction from current view to the archived transactions table
+	- Pulls up previous recurring transactions and lets user keep/delete them
+	"""
+	thismonth = datetime.today().replace(day=1,hour=0,minute=0,second=0,microsecond=0)
+	lastmonth = datetime.today().replace(month=thismonth.month-1)
+
+	arcTrans = Transaction.query.filter(Transaction.timestamp < thismonth)
+	keys = db.inspect(Transaction).columns.keys()
+	get_columns = lambda trans: {key: getattr(trans, key) for key in keys}
+
+	db.session.bulk_insert_mappings(Arc_Transaction,(get_columns(trans) for trans in arcTrans))
+	arcTrans.delete()
+	db.session.commit()
+	recTrans = Arc_Transaction.query.filter(Arc_Transaction.timestamp < thismonth).filter(
+											Arc_Transaction.timestamp >= lastmonth).filter(
+											Arc_Transaction.recurring==True).all()
+
+	return render_template("newmonth.html", transactions=recTrans)
