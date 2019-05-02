@@ -1,0 +1,9 @@
+
+	<td>{{'$'+'{:.2f}'.format(float(transaction.amount)) }}</td>
+	<td><a href="{{ url_for('results',category=transaction.category,daterange='all') }}">{{ transaction.category }}</a></td>
+	<td>{{ transaction.timestamp }}</td>
+	<td>{{ transaction.note }}</td>
+	<td>
+		<input type="checkbox" id="id_{{transaction.note}}" name="checked" value="{{transaction.id}}">
+    	<label for="id_{{transaction.username}}"></label>
+	</td>

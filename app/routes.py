@@ -15,12 +15,13 @@ def checknewmonth(f):
 	def decorated_function(*args,**kwargs):
 		if current_user.dA_timestamp.month != date.today().month:
 			return redirect(url_for('newmonth'))
-		return f(*arg,**kwargs)
+		return f(*args,**kwargs)
 	return decorated_function
 
 @app.route('/')
 @app.route('/index')
 @login_required
+@checknewmonth
 def index():
 	user = User.query.filter_by(username=current_user.username).first_or_404()
 	#recalculate daily amount if the day is stale
@@ -92,6 +93,7 @@ def register():
 
 @app.route('/transactions',methods=['GET','POST'])
 @login_required
+@checknewmonth
 def transactions():
 	user = User.query.filter_by(username=current_user.username).first_or_404()
 	form = AddTransactionForm()
@@ -329,6 +331,7 @@ def edit(id):
 
 @app.route('/charts',methods=['GET','POST'])
 @login_required
+@checknewmonth
 def charts():
 	trans_dict = dict()
 	transactions = Transaction.query.filter_by(payer=current_user).all()
@@ -353,6 +356,7 @@ def charts():
 
 @app.route('/budgets',methods=['GET','POST'])
 @login_required
+@checknewmonth
 def budgets():
 	#Gets all budgets to display on screen
 	buds = Budget.query.filter_by(budgeter=current_user).all()
@@ -362,8 +366,11 @@ def budgets():
 	percentages = dict()
 	#Sets current amount (cur_amount) in the budget data
 	for bud in buds:
-		bud.cur_amount = bud_dict[bud.category]
-		percentages[bud.category] = 100*(bud.cur_amount/float(bud.max_amount))
+		try:
+			bud.cur_amount = bud_dict[bud.category]
+			percentages[bud.category] = 100*(bud.cur_amount/float(bud.max_amount))
+		except KeyError:
+			print("key doesn't exist yet")
 	
 
 	form = AddBudgetForm()
@@ -377,10 +384,10 @@ def budgets():
 		db.session.commit()
 		return redirect(url_for('budgets'))
 	return render_template('budgets.html',buds=buds,form=form,title="Budgets",percentages=percentages,
-		default=default)
+		default=default, float = float)
 
 
-@app.route('/newmonth')
+@app.route('/newmonth',methods=['GET', 'POST'])
 @login_required
 def newmonth():
 	"""
@@ -401,4 +408,31 @@ def newmonth():
 											Arc_Transaction.timestamp >= lastmonth).filter(
 											Arc_Transaction.recurring==True).all()
 
-	return render_template("newmonth.html", transactions=recTrans)
+	"""
+	1. Gets all the id's in a list of strings of checked archived transactions
+	2. Loops through the id's, and sets a equal to the matching archived transaction
+	3. Creates a new transation, t, with everything equal except the month
+	4. adds that transaction to the db, and commits at the ned
+	"""
+	if request.method == "POST":
+		keepTrans = request.form.getlist('checked') #list of the ID's we want to keep
+		for keep in keepTrans:
+			a = Arc_Transaction.query.filter(Arc_Transaction.id == int(keep)).first()
+			t = Transaction(note=a.note,amount=a.amount,
+			recurring=True,payer=current_user,category=a.category,
+			timestamp=a.timestamp.replace(month=thismonth.month))
+			db.session.add(t)
+
+		user = User.query.filter_by(username=current_user.username).first_or_404()
+		user.dA_timestamp = date.today()
+		db.session.commit()
+
+
+
+		next_page = request.args.get('next')
+		if not next_page or url_parse(next_page).netloc != '':
+				next_page = url_for('index')
+		return redirect(next_page)
+
+
+	return render_template("newmonth.html", transactions=recTrans, float = float)

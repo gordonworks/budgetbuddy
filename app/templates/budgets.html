@@ -6,7 +6,7 @@
 			{% if buds %}
 			{% for bud in buds %}
 				<div class="progress">
-  					<div class="progress-bar bg-success" role="progressbar" style="width:{{ percentages[bud.category] }}%" aria-valuenow="{{ percentages[bud.category] }}" aria-valuemin="0" aria-valuemax="100">{{ bud.category }}: {{ '$'+'{:.2f}'.format(bud.cur_amount) }} / {{ '$'+'{}'.format(bud.max_amount) }}
+  					<div class="progress-bar bg-success" role="progressbar" style="width:{{ percentages[bud.category] }}%" aria-valuenow="{{ percentages[bud.category] }}" aria-valuemin="0" aria-valuemax="100">{{ bud.category }}: {{ '$'+'{:.2f}'.format(float(bud.cur_amount)) }} / {{ '$'+'{}'.format(bud.max_amount) }}
   					</div>
 				</div>
 				<button class="btn btn-default btn-sm" onclick="window.location.href='{{ url_for("delete",type="budget",id=bud.id,next=request.full_path) }}';">

@@ -1,6 +1,5 @@
 
-	{# <td>{{'$'+'{:.2f}'.format(transaction.amount) }}</td> #}
-	<td>{{ transaction.amount }}
+	<td>{{'$'+'{:.2f}'.format(transaction.amount) }}</td>
 	<td><a href="{{ url_for('results',category=transaction.category,daterange='all') }}">{{ transaction.category }}</a></td>
 	<td>{{ transaction.timestamp }}</td>
 	<td>{{ transaction.note }}</td>

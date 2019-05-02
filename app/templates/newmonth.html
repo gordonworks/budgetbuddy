@@ -3,20 +3,24 @@
 
 {% block app_content %}
 
+<h2>New month! Do you want to keep these?</h2>
+
 <table class = "table table-hover table-sm ">
 	<tr>
 		<th>Amount</th>
 		<th>Category</th>
 		<th>Date</th>
 		<th>Note</th>
-		<th>EditBtn</th>
+		<th>Keep?</th>
 	</tr>
-
+	<form method="post">
 	{% for transaction in transactions %}
 		<tr>
-		{% include '_transaction.html' %}
+		{% include '_keeptransaction.html' %}
 		</tr>
 	{% endfor %}
 
 </table>
+		<input type="Submit" value="Submit">
+	</form>
 {% endblock %}
